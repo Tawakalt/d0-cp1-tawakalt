@@ -1,0 +1,38 @@
+#l1, #my-signin2, #l2, #rm, #news {
+	font-family: "Times New Roman", Times, serif;
+}
+
+#l1 {
+	color: red;
+	font-style: oblique;
+	font-size: 40px;
+	text-align: center;
+	padding: 70px 0;
+}
+
+#my-signin2 {
+	display: block;
+    margin: auto;
+    width: 40%;
+}
+
+#l2 {
+	font-size: 200%;
+	color: blue;
+	padding: 5px
+}
+
+#rm {
+	color: white;
+	padding: 5px
+}
+
+#news {
+	background-color: blue;
+	color: red;
+	padding: 5px;
+	font-style: oblique;
+	font-size: 40px;
+	font-family: "Times New Roman", Times, serif;
+	text-align: center;
+}
