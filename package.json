@@ -1,7 +1,7 @@
 {
   "name": "reactjs-basics",
   "version": "1.0.0",
-  "description": "My First ReactJs App",
+  "description": "A News Application",
   "main": "dist/server.js",
   "scripts": {
     "start": "node dist/server.js",
