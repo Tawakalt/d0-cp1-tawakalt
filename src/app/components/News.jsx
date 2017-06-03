@@ -1,9 +1,9 @@
 import React from 'react';
 import Request from 'superagent';
 import _ from 'lodash';
-import AppStore from '../stores/AppStore.jsx';
-import * as AppActions from '../actions/AppActions.jsx';
-import * as AppActions2 from '../actions/AppActions2.jsx';
+import AppStore from '../stores/AppStore';
+import * as AppActions from '../actions/AppActions';
+import * as AppActions2 from '../actions/AppActions2';
 import moment from 'moment';
 
 export default class News extends React.Component{

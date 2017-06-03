@@ -1,5 +1,5 @@
 import EventEmitter from 'events';
-import dispatcher from '../dispatchers/dispatcher.jsx';
+import dispatcher from '../dispatchers/dispatcher';
 
 class AppStore2 extends EventEmitter{
   constructor() {

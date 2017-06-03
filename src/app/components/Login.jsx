@@ -1,10 +1,9 @@
 import React from 'react';
 import { GoogleLogin } from 'react-google-login-component';
-import AppStore from '../stores/AppStore.jsx';
-import * as AppActions from '../actions/AppActions2.jsx';
+import AppStore from '../stores/AppStore';
+import * as AppActions from '../actions/AppActions2';
 
-const LoginButton = React.createClass({
-
+const LoginButton = React.createClass( {
   onSignIn: function(googleUser) {
     const id_token = googleUser.getAuthResponse().id_token;  
     AppActions.getAuth(id_token);
