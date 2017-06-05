@@ -20,19 +20,23 @@ export default class News extends React.Component{
   }
 
   updateSearch(){
+    //Fire off action createUrl
     AppActions.createUrl(this.refs.query.value,this.refs.query2.value)
   }
 
   logout(){
     const auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
+      //Fire off action getAuth
       AppActions2.getAuth(null);
     });    
   }
 
   render(){
     const news = _.map(this.state.news, (newss) => {
+      //create key
       const id = newss.publishedAt + newss.title;
+      //Display the result from the API
       return (
        <div className="container" key={id}>
           <h3 id='l2'>{newss.title}</h3>
@@ -86,7 +90,8 @@ export default class News extends React.Component{
     );
   }
 
-  search(query, query2) {
+  search() {
+    //get url from store
     var url = AppStore.getUrl(); 
     Request.get(url).then((response) => {
       this.setState({

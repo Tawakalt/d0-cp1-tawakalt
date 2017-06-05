@@ -3,13 +3,20 @@ import { GoogleLogin } from 'react-google-login-component';
 import AppStore from '../stores/AppStore';
 import * as AppActions from '../actions/AppActions2';
 
-const LoginButton = React.createClass( {
-  onSignIn: function(googleUser) {
+export default class Login extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.onSignIn = this.onSignIn.bind(this);
+    this.renderGoogleLoginButton = this.renderGoogleLoginButton.bind(this);
+  }
+
+  onSignIn(googleUser) {
     const id_token = googleUser.getAuthResponse().id_token;  
     AppActions.getAuth(id_token);
-  },
+  }
 
-  renderGoogleLoginButton: function() {
+  renderGoogleLoginButton() {
     console.log('rendering google signin button')
     gapi.signin2.render('my-signin2', {
       'scope': 'https://www.googleapis.com/auth/plus.login',
@@ -19,13 +26,13 @@ const LoginButton = React.createClass( {
       'theme': 'light',
       'onsuccess': this.onSignIn
     })
-  },
+  }
 
-  componentDidMount: function() {
+  componentDidMount() {
     window.addEventListener('google-loaded',this.renderGoogleLoginButton);
-  },
+  }
 
-  render: function() {
+  render() {
     let displayText = "Sign in with Google";
     return (
     <div>
@@ -38,6 +45,4 @@ const LoginButton = React.createClass( {
     </div>
     );
   }
-});
-
-export default LoginButton;
+}

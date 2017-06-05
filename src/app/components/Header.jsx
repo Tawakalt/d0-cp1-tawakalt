@@ -8,7 +8,6 @@ export default class Header extends React.Component {
   constructor(props) {
     super(props);
     this.updateState = this.updateState.bind(this);
-    this.setState = this.setState.bind(this);
     this.state = {};
   }
 
@@ -22,10 +21,13 @@ export default class Header extends React.Component {
 
   updateState() {
     this.setState({
+      // get auth from store
       auth: AppStore2.getAuth(),
     });
+    console,log(this.state.auth);
   }
 
+  //declare routes based on the value of auth
   render() {
     return (
       <div>
