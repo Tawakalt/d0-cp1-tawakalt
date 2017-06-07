@@ -1,12 +1,13 @@
 import React from 'react';
 import Request from 'superagent';
 import _ from 'lodash';
+import moment from 'moment';
 import AppStore from '../stores/AppStore';
 import * as AppActions from '../actions/AppActions';
 import * as AppActions2 from '../actions/AppActions2';
-import moment from 'moment';
 
-export default class News extends React.Component{
+
+export default class News extends React.Component {
   constructor() {
     super ();
     this.state = {};
@@ -91,8 +92,8 @@ export default class News extends React.Component{
   }
 
   search() {
-    //get url from store
-    var url = AppStore.getUrl(); 
+    // get url from store
+    const url = AppStore.getUrl(); 
     Request.get(url).then((response) => {
       this.setState({
         news: response.body.articles,
