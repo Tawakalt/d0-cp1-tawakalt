@@ -24,7 +24,6 @@ export default class Header extends React.Component {
       // get auth from store
       auth: AppStore2.getAuth(),
     });
-    console,log(this.state.auth);
   }
 
   //declare routes based on the value of auth
@@ -35,6 +34,7 @@ export default class Header extends React.Component {
           <div>
             <Route exact path="/" render={() => (this.state.auth ? (<Redirect to="/news" />) : (<Login />))} />
             <Route path="/news" render={() => (!this.state.auth ? (<Redirect to="/" />) : (<News />))} />
+            <Route path="*" render={() => (!this.state.auth ? (<Redirect to="/" />) : (<News />))} />
           </div>
         </Router>
       </div>

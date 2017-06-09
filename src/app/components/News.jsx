@@ -9,7 +9,7 @@ import * as AppActions2 from '../actions/AppActions2';
 
 export default class News extends React.Component {
   constructor() {
-    super ();
+    super();
     this.state = {};
   }
 
@@ -18,72 +18,86 @@ export default class News extends React.Component {
       this.search();
     });
     this.search();
+    this.sources();
   }
 
-  updateSearch(){
-    //Fire off action createUrl
-    AppActions.createUrl(this.refs.query.value,this.refs.query2.value)
+  updateSearch() {
+    // Fire off action createUrl
+    AppActions.createUrl(this.query.value, this.query2.value);
   }
 
-  logout(){
+  updateSearch2() {
+    // Fire off action createUrl
+    AppActions.createUrl('test');
+  }
+
+  logout() {
     const auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-      //Fire off action getAuth
+    auth2.signOut().then(() => {
+      // Fire off action getAuth
       AppActions2.getAuth(null);
-    });    
+    });
   }
 
-  render(){
+  render() {
     const news = _.map(this.state.news, (newss) => {
-      //create key
+      // create key
       const id = newss.publishedAt + newss.title;
-      //Display the result from the API
+      // Display the result from the API
       return (
-       <div className="container" key={id}>
-          <h3 id='l2'>{newss.title}</h3>
-          <img src={newss.urlToImage}/>
-          <p><i>{(moment(new Date(newss.publishedAt))).format('LLLL')}</i></p>
+        <div className="container" key={id}>
+          <h3 id="l2">{newss.title}</h3>
+          <img alt="" src={newss.urlToImage} />
+          <p>
+            <i>{(moment(new Date(newss.publishedAt))).format('LLLL')}</i>
+          </p>
           <p>{newss.author} : {newss.description}</p>
-          <p><button className="btn btn-danger"><a id='rm' href={newss.url} target='_blank'>Read More</a></button></p>          
-          <hr/>
-       </div>
+          <p>
+            <button className="btn btn-danger">
+              <a id="rm" href={newss.url} target="_blank">Read More</a>
+            </button>
+          </p>
+          <hr />
+        </div>
       );
     });
+    const sources = _.map(this.state.sources, (sourcess) => 
+      // Display the result from the API
+       (
+         <option key={sourcess.id} value={sourcess.id}>{sourcess.name}</option>
+
+      ));
     return (
       <div>
-        <div className="container-fluid" id='news'>
-          <h1>NEWS!!!</h1>         
+        <div className="container-fluid" id="news">
+          <h1>NEWS!!!</h1>
         </div>
         <div className="container">
           <div className="form-group">
-            <div className='row'>
+            <div className="row">
               <div className="col-md-4 pull-right">
-                 <br/>   
-                <button className="btn btn-block btn-danger btn-lg btn-huge" onClick={(event) => { this.logout(); } }>Logout</button>
+                <br />
+                <button className="btn btn-block btn-danger btn-lg btn-huge" onClick={(event) => { this.logout(); }}>
+                  Logout
+                </button>
               </div>
               <div className="col-md-4 pull-left">
-                <label>Sources</label>
-                <select className="form-control" ref='query' onChange={(event) => { this.updateSearch(); } }>
-                  <option value="al-jazeera-english">Al Jazeera English</option>
-                  <option value="ars-technica">Ars Technica</option>
-                  <option value="bild">Bild</option>
-                  <option value="breitbart-news">Breibart News</option>
-                  <option value="time">Time</option>
-                  <option value="fortune">Fortune</option>
-                  <option value="techcrunch">Techcrunch</option>
-                  <option value="mirror">Mirror</option>
+                <label htmlFor="this.query">Sources</label>
+                <select className="form-control" ref={(c) => { this.query = c; }} onChange={(event) => { this.updateSearch(); }}>
+                  {sources}
                 </select>
               </div>
               <div className="col-md-4">
-                <label>Sort By</label>
-                <select className="form-control" ref='query2' onChange={(event) => { this.updateSearch(); } }>
+                <label htmlFor="this.query2">Sort By</label>
+                <select className="form-control" ref={(c) => { this.query2 = c; }} onChange={(event) => { this.updateSearch(); }}>
                   <option value="top">Top</option>
                   <option value="latest">Latest</option>
+                  <option value="popular">Popular</option>
                 </select>
               </div>
             </div>
           </div>
-          <div className='row'>
+          <div className="row">
             <ul>{news}</ul>
           </div>
         </div>
@@ -93,10 +107,20 @@ export default class News extends React.Component {
 
   search() {
     // get url from store
-    const url = AppStore.getUrl(); 
+    const url = AppStore.getUrl();
     Request.get(url).then((response) => {
       this.setState({
         news: response.body.articles,
+      });
+    });
+  }
+
+  sources() {
+    // get url from store
+    const url = AppStore.getSourceUrl();
+    Request.get(url).then((response) => {
+      this.setState({
+        sources: response.body.sources,
       });
     });
   }

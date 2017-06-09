@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 import AppStore from '../src/app/stores/AppStore2';
 import AppDispatcher from '../src/app/dispatchers/dispatcher';
+import * as AppActions from '../src/app/actions/AppActions2';
 
 describe('AppActions', () => {
   describe('AppStore', () => {
@@ -9,6 +10,7 @@ describe('AppActions', () => {
     });
 
     it('creates auth', () => {
+      AppActions.getAuth('query');
       AppDispatcher.dispatch({
         type: 'GET_AUTH',
         query: 'query',

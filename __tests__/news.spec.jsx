@@ -5,6 +5,7 @@ import News from '../src/app/components/News.jsx';
 
 describe('News', () => {
   const wrapper = shallow(<News />);
+  const updateSearch2 = wrapper.instance().updateSearch2();
 
   it('should have 2 select inputs', () => {
     expect(wrapper.find('select')).to.have.length(2);
@@ -12,6 +13,14 @@ describe('News', () => {
 
   it('should have 2 label tags', () => {
     expect(wrapper.find('label')).to.have.length(2);
+  });
+
+  it('should have 9 div tags', () => {
+    expect(wrapper.find('div')).to.have.length(9);
+  });
+
+  it('should have 3 p tags', () => {
+    expect(wrapper.find('p')).to.have.length(0);
   });
 
   it('should have an h1 tag', () => {
