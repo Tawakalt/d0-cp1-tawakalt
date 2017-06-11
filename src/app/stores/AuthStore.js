@@ -1,7 +1,7 @@
 import EventEmitter from 'events';
 import dispatcher from '../dispatchers/dispatcher';
 
-class AppStore2 extends EventEmitter{
+class AuthStore extends EventEmitter{
   constructor() {
     super ();
     this.auth = null;
@@ -25,6 +25,6 @@ class AppStore2 extends EventEmitter{
   }
 }
 
-const appStore2 = new AppStore2;
-dispatcher.register(appStore2.handleActions.bind(appStore2));
-export default appStore2;
+const authStore = new AuthStore;
+dispatcher.register(authStore.handleActions.bind(authStore));
+export default authStore;

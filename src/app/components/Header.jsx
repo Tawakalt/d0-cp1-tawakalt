@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import News from './News.jsx';
 import Login from './Login.jsx';
-import AppStore2 from '../stores/AppStore2';
+import AuthStore from '../stores/AuthStore';
 
 export default class Header extends React.Component {
   constructor(props) {
@@ -12,17 +12,17 @@ export default class Header extends React.Component {
   }
 
   componentWillMount() {
-    AppStore2.on('change', this.updateState);
+    AuthStore.on('change', this.updateState);
   }
 
   componentWillUnmount() {
-    AppStore2.removeListener('change', this.updateState);
+    AuthStore.removeListener('change', this.updateState);
   }
 
   updateState() {
     this.setState({
       // get auth from store
-      auth: AppStore2.getAuth(),
+      auth: AuthStore.getAuth(),
     });
   }
 

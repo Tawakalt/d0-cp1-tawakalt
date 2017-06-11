@@ -1,7 +1,7 @@
 import React from 'react';
 import { GoogleLogin } from 'react-google-login-component';
-import AppStore from '../stores/AppStore';
-import * as AppActions from '../actions/AppActions2';
+// import AppStore from '../stores/AppStore';
+import * as AuthActions from '../actions/AuthActions';
 
 export default class Login extends React.Component {
   constructor(props) {
@@ -13,7 +13,7 @@ export default class Login extends React.Component {
 
   onSignIn(googleUser) {
     const id_token = googleUser.getAuthResponse().id_token;  
-    AppActions.getAuth(id_token);
+    AuthActions.getAuth(id_token);
   }
 
   renderGoogleLoginButton() {

@@ -2,9 +2,9 @@ import React from 'react';
 import Request from 'superagent';
 import _ from 'lodash';
 import moment from 'moment';
-import AppStore from '../stores/AppStore';
-import * as AppActions from '../actions/AppActions';
-import * as AppActions2 from '../actions/AppActions2';
+import UrlStore from '../stores/UrlStore';
+import * as UrlActions from '../actions/UrlActions';
+import * as AuthActions from '../actions/AuthActions';
 
 
 export default class News extends React.Component {
@@ -14,7 +14,7 @@ export default class News extends React.Component {
   }
 
   componentWillMount() {
-    AppStore.on('change', () => {
+    UrlStore.on('change', () => {
       this.search();
     });
     this.search();
@@ -23,19 +23,19 @@ export default class News extends React.Component {
 
   updateSearch() {
     // Fire off action createUrl
-    AppActions.createUrl(this.query.value, this.query2.value);
+    UrlActions.createUrl(this.query.value, this.query2.value);
   }
 
   updateSearch2() {
     // Fire off action createUrl
-    AppActions.createUrl('test');
+    UrlActions.createUrl('test');
   }
 
   logout() {
     const auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(() => {
       // Fire off action getAuth
-      AppActions2.getAuth(null);
+      AuthActions.getAuth(null);
     });
   }
 
@@ -107,7 +107,7 @@ export default class News extends React.Component {
 
   search() {
     // get url from store
-    const url = AppStore.getUrl();
+    const url = UrlStore.getUrl();
     Request.get(url).then((response) => {
       this.setState({
         news: response.body.articles,
@@ -117,7 +117,7 @@ export default class News extends React.Component {
 
   sources() {
     // get url from store
-    const url = AppStore.getSourceUrl();
+    const url = UrlStore.getSourceUrl();
     Request.get(url).then((response) => {
       this.setState({
         sources: response.body.sources,

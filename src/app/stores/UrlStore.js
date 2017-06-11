@@ -1,7 +1,7 @@
 import EventEmitter from 'events';
 import dispatcher from '../dispatchers/dispatcher';
 
-class AppStore extends EventEmitter{
+class UrlStore extends EventEmitter{
   constructor() {
     super ();
     this.query = 'abc-news-au';
@@ -32,6 +32,6 @@ class AppStore extends EventEmitter{
   }
 }
 
-const appStore = new AppStore;
-dispatcher.register(appStore.handleActions.bind(appStore));
-export default appStore;
+const urlStore = new UrlStore;
+dispatcher.register(urlStore.handleActions.bind(urlStore));
+export default urlStore;
