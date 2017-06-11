@@ -54,14 +54,14 @@ export default class News extends React.Component {
           <p>{newss.author} : {newss.description}</p>
           <p>
             <button className="btn btn-danger">
-              <a id="rm" href={newss.url} target="_blank">Read More</a>
+              <a id="rm" href={newss.url} target="_blank" rel="noopener noreferrer">Read More</a>
             </button>
           </p>
           <hr />
         </div>
       );
     });
-    const sources = _.map(this.state.sources, (sourcess) => 
+    const sources = _.map(this.state.sources, sourcess =>
       // Display the result from the API
        (
          <option key={sourcess.id} value={sourcess.id}>{sourcess.name}</option>
@@ -77,19 +77,30 @@ export default class News extends React.Component {
             <div className="row">
               <div className="col-md-4 pull-right">
                 <br />
-                <button className="btn btn-block btn-danger btn-lg btn-huge" onClick={(event) => { this.logout(); }}>
+                <button
+                  className="btn btn-block btn-danger btn-lg btn-huge"
+                  onClick={(event) => { this.logout(); }}
+                >
                   Logout
                 </button>
               </div>
               <div className="col-md-4 pull-left">
                 <label htmlFor="this.query">Sources</label>
-                <select className="form-control" ref={(c) => { this.query = c; }} onChange={(event) => { this.updateSearch(); }}>
+                <select
+                  className="form-control"
+                  ref={(c) => { this.query = c; }}
+                  onChange={(event) => { this.updateSearch(); }}
+                >
                   {sources}
                 </select>
               </div>
               <div className="col-md-4">
                 <label htmlFor="this.query2">Sort By</label>
-                <select className="form-control" ref={(c) => { this.query2 = c; }} onChange={(event) => { this.updateSearch(); }}>
+                <select
+                  className="form-control"
+                  ref={(c) => { this.query2 = c; }}
+                  onChange={(event) => { this.updateSearch(); }}
+                >
                   <option value="top">Top</option>
                   <option value="latest">Latest</option>
                   <option value="popular">Popular</option>

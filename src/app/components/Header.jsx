@@ -26,14 +26,21 @@ export default class Header extends React.Component {
     });
   }
 
-  //declare routes based on the value of auth
+  // declare routes based on the value of auth
   render() {
     return (
       <div>
         <Router>
           <div>
-            <Route exact path="/" render={() => (this.state.auth ? (<Redirect to="/news" />) : (<Login />))} />
-            <Route path="/news" render={() => (!this.state.auth ? (<Redirect to="/" />) : (<News />))} />
+            <Route
+              exact
+              path="/"
+              render={() => (this.state.auth ? (<Redirect to="/news" />) : (<Login />))}
+            />
+            <Route
+              path="/news"
+              render={() => (!this.state.auth ? (<Redirect to="/" />) : (<News />))}
+            />
           </div>
         </Router>
       </div>
