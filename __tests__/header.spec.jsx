@@ -9,7 +9,7 @@ describe('Header', () => {
   
 
   it('should declare 2 routes', () => {
-    expect(wrapper.find('Route')).to.have.length(3);
+    expect(wrapper.find('Route')).to.have.length(2);
   });
 
   it('should declare 1 Router', () => {
