@@ -36,6 +36,7 @@
     "react-google-login-component": "^0.7.0",
     "react-router-dom": "^4.1.1",
     "sass-loader": "^6.0.5",
+    "striptags": "^3.0.1",
     "superagent": "^3.5.2",
     "webpack": "^2.6.1"
   },

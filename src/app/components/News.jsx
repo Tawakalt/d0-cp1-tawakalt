@@ -2,9 +2,13 @@ import React from 'react';
 import Request from 'superagent';
 import _ from 'lodash';
 import moment from 'moment';
+import mercuryParser from 'mercury-parser';
+import striptags from 'striptags';
 import UrlStore from '../stores/UrlStore';
 import * as UrlActions from '../actions/UrlActions';
 import * as AuthActions from '../actions/AuthActions';
+
+const mercury = mercuryParser('ooyHUD7ccczgN4x8J37dG3VtpLhzsLMS2BWutEVf');
 
 
 export default class News extends React.Component {
@@ -26,9 +30,17 @@ export default class News extends React.Component {
     UrlActions.createUrl(this.query.value, this.query2.value);
   }
 
-  updateSearch2() {
+  updateSearch3() {
     // Fire off action createUrl
-    AppActions.createUrl('test');
+    UrlActions.createUrl('test');
+  }
+
+  updateSearch2(url) {
+    return mercury.parse(url).then((response) => {
+      this.setState({
+        content: striptags(response.content, [], '\n'),
+      });
+    }).catch((err) => {});
   }
 
   logout() {
@@ -53,8 +65,12 @@ export default class News extends React.Component {
           </p>
           <p>{newss.author} : {newss.description}</p>
           <p>
-            <button className="btn btn-danger">
-              <a id="rm" href={newss.url} target="_blank">Read More</a>
+            <button
+              className="btn btn-danger" 
+              id="rm" 
+              onClick={(event) => { this.updateSearch2(newss.url); }}
+            >
+              Read More
             </button>
           </p>
           <hr />
@@ -110,6 +126,9 @@ export default class News extends React.Component {
           </div>
           <div className="row">
             <ul>{news}</ul>
+          </div>
+          <div className="row">
+           {this.state.content}
           </div>
         </div>
       </div>
