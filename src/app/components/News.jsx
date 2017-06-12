@@ -36,6 +36,7 @@ export default class News extends React.Component {
     auth2.signOut().then(() => {
       // Fire off action getAuth
       AuthActions.getAuth(null);
+      location.reload();
     });
   }
 
