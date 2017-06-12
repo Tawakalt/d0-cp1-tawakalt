@@ -34,6 +34,8 @@
     "react-dom": "^15.5.4",
     "react-google-login": "^2.8.9",
     "react-google-login-component": "^0.7.0",
+    "react-modal": "^1.7.13",
+    "react-render-html": "^0.1.6",
     "react-router-dom": "^4.1.1",
     "sass-loader": "^6.0.5",
     "superagent": "^3.5.2",

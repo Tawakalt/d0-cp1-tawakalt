@@ -2,23 +2,48 @@ import React from 'react';
 import Request from 'superagent';
 import _ from 'lodash';
 import moment from 'moment';
+import mercuryParser from 'mercury-parser';
+import renderHTML from 'react-render-html';
+import ReactModal from 'react-modal';
 import UrlStore from '../stores/UrlStore';
+import ScrapeStore from '../stores/ScrapeStore';
 import * as UrlActions from '../actions/UrlActions';
 import * as AuthActions from '../actions/AuthActions';
+import * as ScrapeActions from '../actions/ScrapeActions';
 
+const mercury = mercuryParser('ooyHUD7ccczgN4x8J37dG3VtpLhzsLMS2BWutEVf');
 
 export default class News extends React.Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      showModal: false,
+    };
+    this.handleOpenModal = this.handleOpenModal.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
   }
 
   componentWillMount() {
     UrlStore.on('change', () => {
+      this.setState({
+        content: '',
+      });
       this.search();
+    });
+    ScrapeStore.on('change', () => {
+      // location.reload();
+      this.scrape();
     });
     this.search();
     this.sources();
+  }
+
+  handleOpenModal() {
+    this.setState({ showModal: true });
+  }
+
+  handleCloseModal() {
+    this.setState({ showModal: false });
   }
 
   updateSearch() {
@@ -26,9 +51,12 @@ export default class News extends React.Component {
     UrlActions.createUrl(this.query.value, this.query2.value);
   }
 
-  updateSearch2() {
+  updateSearch2(url) {
     // Fire off action createUrl
-    UrlActions.createUrl('test');
+    this.setState({
+      url,
+    });
+    ScrapeActions.createUrl(url);
   }
 
   logout() {
@@ -36,7 +64,45 @@ export default class News extends React.Component {
     auth2.signOut().then(() => {
       // Fire off action getAuth
       AuthActions.getAuth(null);
-      location.reload();
+      // location.reload();
+    });
+  }
+
+  search() {
+    // get url from store
+    const url = UrlStore.getUrl();
+    Request.get(url).then((response) => {
+      this.setState({
+        news: response.body.articles,
+      });
+    });
+  }
+
+  sources() {
+    // get url from store
+    const url = UrlStore.getSourceUrl();
+    Request.get(url).then((response) => {
+      this.setState({
+        sources: response.body.sources,
+      });
+    });
+  }
+
+  scrape() {
+    // get url from store
+    const url = ScrapeStore.getUrl();
+
+    // scrape with mercury parser
+    return mercury.parse(url).then((response) => {
+      this.setState({
+        content: renderHTML(response.content),
+        title: renderHTML(response.title),
+        image: renderHTML(response.lead_image_url),
+        author: renderHTML(response.author),
+        url: renderHTML(response.url),
+      });
+      this.handleOpenModal();
+    }).catch(() => {
     });
   }
 
@@ -55,7 +121,15 @@ export default class News extends React.Component {
           <p>{newss.author} : {newss.description}</p>
           <p>
             <button className="btn btn-danger">
-              <a id="rm" href={newss.url} target="_blank" rel="noopener noreferrer">Read More</a>
+              <a id="rm" href={newss.url} target="_blank" rel="noopener noreferrer">Read From Source</a>
+            </button>
+          </p>
+          <p>
+            <button
+              className="btn btn-danger"
+              onClick={(event) => { this.updateSearch2(newss.url); }}
+            >
+             Read Here
             </button>
           </p>
           <hr />
@@ -80,7 +154,7 @@ export default class News extends React.Component {
                 <br />
                 <button
                   className="btn btn-block btn-danger btn-lg btn-huge"
-                  onClick={(event) => { this.logout(); }}
+                  onClick={() => { this.logout(); }}
                 >
                   Logout
                 </button>
@@ -90,7 +164,7 @@ export default class News extends React.Component {
                 <select
                   className="form-control"
                   ref={(c) => { this.query = c; }}
-                  onChange={(event) => { this.updateSearch(); }}
+                  onChange={() => { this.updateSearch(); }}
                 >
                   {sources}
                 </select>
@@ -100,7 +174,7 @@ export default class News extends React.Component {
                 <select
                   className="form-control"
                   ref={(c) => { this.query2 = c; }}
-                  onChange={(event) => { this.updateSearch(); }}
+                  onChange={() => { this.updateSearch(); }}
                 >
                   <option value="top">Top</option>
                   <option value="latest">Latest</option>
@@ -112,28 +186,18 @@ export default class News extends React.Component {
           <div className="row">
             <ul>{news}</ul>
           </div>
+          <div>
+            <ReactModal 
+              isOpen={this.state.showModal}
+              contentLabel="Minimal Modal Example"
+            >
+              <button onClick={this.handleCloseModal}>Close</button>
+              {this.state.content}
+              <button onClick={this.handleCloseModal}>Close</button>
+            </ReactModal>
+          </div>
         </div>
       </div>
     );
-  }
-
-  search() {
-    // get url from store
-    const url = UrlStore.getUrl();
-    Request.get(url).then((response) => {
-      this.setState({
-        news: response.body.articles,
-      });
-    });
-  }
-
-  sources() {
-    // get url from store
-    const url = UrlStore.getSourceUrl();
-    Request.get(url).then((response) => {
-      this.setState({
-        sources: response.body.sources,
-      });
-    });
   }
 }

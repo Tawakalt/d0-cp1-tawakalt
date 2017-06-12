@@ -3,15 +3,11 @@ import { GoogleLogin } from 'react-google-login-component';
 import * as AuthActions from '../actions/AuthActions';
 
 export default class Login extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
     this.state = {};
     this.onSignIn = this.onSignIn.bind(this);
     this.renderGoogleLoginButton = this.renderGoogleLoginButton.bind(this);
-  }
-
-  componentDidMount() {
-    window.addEventListener('google-loaded', this.renderGoogleLoginButton);
   }
 
   onSignIn(googleUser) {
@@ -23,10 +19,6 @@ export default class Login extends React.Component {
     // console.log('rendering google signin button')
     gapi.signin2.render('my-signin2', {
       scope: 'https://www.googleapis.com/auth/plus.login',
-      width: 220,
-      height: 50,
-      longtitle: true,
-      theme: 'light',
       onsuccess: this.onSignIn,
     });
   }
@@ -38,8 +30,14 @@ export default class Login extends React.Component {
         <div className="container" id="l1">
           <h1>Sign In with your gmail account and get instant access to news!!!</h1>
         </div>
-        <div className="row">
-          <div id="my-signin2"></div>
+        <div id="my-signin2">
+          <GoogleLogin
+            socialId="988973865780-3v66qmptthhkfm9hh242hg5kkehek0kt.apps.googleusercontent.com"
+            class="google-login"
+            scope="profile"
+            responseHandler={this.onSignIn}
+            buttonText="Login With Google"
+          />
         </div>
       </div>
     );
