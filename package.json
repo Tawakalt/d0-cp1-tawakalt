@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "A News Application",
   "main": "dist/server.js",
+  "engines": {
+    "node": "6.10.3"
+  },
   "scripts": {
     "test": "jest --coverage",
     "start": "node dist/server.js",
