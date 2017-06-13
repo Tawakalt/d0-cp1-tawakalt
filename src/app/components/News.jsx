@@ -39,6 +39,26 @@ export default class News extends React.Component {
     });
   }
 
+  search() {
+    // get url from store
+    const url = UrlStore.getUrl();
+    Request.get(url).then((response) => {
+      this.setState({
+        news: response.body.articles,
+      });
+    });
+  }
+
+  sources() {
+    // get url from store
+    const url = UrlStore.getSourceUrl();
+    Request.get(url).then((response) => {
+      this.setState({
+        sources: response.body.sources,
+      });
+    });
+  }
+
   render() {
     const news = _.map(this.state.news, (newss) => {
       // create key
@@ -114,25 +134,5 @@ export default class News extends React.Component {
         </div>
       </div>
     );
-  }
-
-  search() {
-    // get url from store
-    const url = UrlStore.getUrl();
-    Request.get(url).then((response) => {
-      this.setState({
-        news: response.body.articles,
-      });
-    });
-  }
-
-  sources() {
-    // get url from store
-    const url = UrlStore.getSourceUrl();
-    Request.get(url).then((response) => {
-      this.setState({
-        sources: response.body.sources,
-      });
-    });
   }
 }
