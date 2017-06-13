@@ -2,7 +2,6 @@ import React from 'react';
 import Request from 'superagent';
 import _ from 'lodash';
 import moment from 'moment';
-import mercuryParser from 'mercury-parser';
 import renderHTML from 'react-render-html';
 import ReactModal from 'react-modal';
 import UrlStore from '../stores/UrlStore';
@@ -11,7 +10,7 @@ import * as UrlActions from '../actions/UrlActions';
 import * as AuthActions from '../actions/AuthActions';
 import * as ScrapeActions from '../actions/ScrapeActions';
 
-const mercury = mercuryParser('ooyHUD7ccczgN4x8J37dG3VtpLhzsLMS2BWutEVf');
+const API_KEY = 'ooyHUD7ccczgN4x8J37dG3VtpLhzsLMS2BWutEVf';
 
 export default class News extends React.Component {
   constructor() {
@@ -64,7 +63,7 @@ export default class News extends React.Component {
     auth2.signOut().then(() => {
       // Fire off action getAuth
       AuthActions.getAuth(null);
-      // location.reload();
+      location.reload();
     });
   }
 
@@ -91,19 +90,29 @@ export default class News extends React.Component {
   scrape() {
     // get url from store
     const url = ScrapeStore.getUrl();
-
-    // scrape with mercury parser
-    return mercury.parse(url).then((response) => {
-      this.setState({
-        content: renderHTML(response.content),
-        title: renderHTML(response.title),
-        image: renderHTML(response.lead_image_url),
-        author: renderHTML(response.author),
-        url: renderHTML(response.url),
+    Request.get(url)
+      .set('X-API-Key', API_KEY)
+      .set('Accept', 'application/json')
+      .end((err, response) => {
+        const content = response.body.content;
+        this.setState({
+          content: renderHTML(content),
+        });
       });
       this.handleOpenModal();
-    }).catch(() => {
-    });
+
+    // scrape with mercury parser
+    // return mercury.parse(url).then((response) => {
+    //   this.setState({
+    //     content: renderHTML(response.content),
+    //     title: renderHTML(response.title),
+    //     image: renderHTML(response.lead_image_url),
+    //     author: renderHTML(response.author),
+    //     url: renderHTML(response.url),
+    //   });
+    //   this.handleOpenModal();
+    // }).catch(() => {
+    // });
   }
 
   render() {
@@ -121,13 +130,15 @@ export default class News extends React.Component {
           <p>{newss.author} : {newss.description}</p>
           <p>
             <button className="btn btn-danger">
-              <a id="rm" href={newss.url} target="_blank" rel="noopener noreferrer">Read From Source</a>
+              <a id="rm" href={newss.url} target="_blank" rel="noopener noreferrer">
+                Read From Source
+              </a>
             </button>
           </p>
           <p>
             <button
               className="btn btn-danger"
-              onClick={(event) => { this.updateSearch2(newss.url); }}
+              onClick={() => { this.updateSearch2(newss.url); }}
             >
              Read Here
             </button>
@@ -187,7 +198,7 @@ export default class News extends React.Component {
             <ul>{news}</ul>
           </div>
           <div>
-            <ReactModal 
+            <ReactModal
               isOpen={this.state.showModal}
               contentLabel="Minimal Modal Example"
             >

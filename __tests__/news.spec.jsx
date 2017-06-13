@@ -16,7 +16,7 @@ describe('News', () => {
   });
 
   it('should have 9 div tags', () => {
-    expect(wrapper.find('div')).to.have.length(9);
+    expect(wrapper.find('div')).to.have.length(10);
   });
 
   it('should have 3 p tags', () => {
@@ -32,7 +32,7 @@ describe('News', () => {
   });
 
   it('should have a button', () => {
-    expect(wrapper.find('button')).to.have.length(1);
+    expect(wrapper.find('button')).to.have.length(3);
   });
 
   it('should have a div with class container', () => {

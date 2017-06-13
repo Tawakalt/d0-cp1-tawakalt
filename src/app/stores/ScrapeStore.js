@@ -8,7 +8,7 @@ class ScrapeStore extends EventEmitter {
   }
 
   scrapeUrl(url) {
-    this.url = url;
+    this.url = `https://mercury.postlight.com/parser?url=${url}`;
     this.emit('change');
   }
 
