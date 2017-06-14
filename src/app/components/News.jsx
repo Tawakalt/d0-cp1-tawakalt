@@ -99,20 +99,7 @@ export default class News extends React.Component {
           content: renderHTML(content),
         });
       });
-      this.handleOpenModal();
-
-    // scrape with mercury parser
-    // return mercury.parse(url).then((response) => {
-    //   this.setState({
-    //     content: renderHTML(response.content),
-    //     title: renderHTML(response.title),
-    //     image: renderHTML(response.lead_image_url),
-    //     author: renderHTML(response.author),
-    //     url: renderHTML(response.url),
-    //   });
-    //   this.handleOpenModal();
-    // }).catch(() => {
-    // });
+    this.handleOpenModal();
   }
 
   render() {

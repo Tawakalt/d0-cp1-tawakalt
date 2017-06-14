@@ -11,7 +11,7 @@ export default class Login extends React.Component {
   }
 
   onSignIn(googleUser) {
-    const id_token = googleUser.getAuthResponse().id_token;  
+    const id_token = googleUser.getAuthResponse().id_token;
     AuthActions.getAuth(id_token);
   }
 
