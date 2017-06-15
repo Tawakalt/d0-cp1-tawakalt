@@ -1,4 +1,5 @@
 import React from 'react';
+import sinon from 'sinon';
 import { shallow } from 'enzyme';
 import News from '../src/app/components/News.jsx';
 

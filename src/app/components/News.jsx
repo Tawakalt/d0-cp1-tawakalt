@@ -160,6 +160,7 @@ export default class News extends React.Component {
               <div className="col-md-4 pull-left">
                 <label htmlFor="this.query">Sources</label>
                 <select
+                  id="selectSources"
                   className="form-control"
                   ref={(c) => { this.query = c; }}
                   onChange={() => { this.updateSearch(); }}
@@ -170,6 +171,7 @@ export default class News extends React.Component {
               <div className="col-md-4">
                 <label htmlFor="this.query2">Sort By</label>
                 <select
+                  id="selectSearch"
                   className="form-control"
                   ref={(c) => { this.query2 = c; }}
                   onChange={() => { this.updateSearch(); }}
