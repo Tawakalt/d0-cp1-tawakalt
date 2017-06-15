@@ -2,41 +2,104 @@ import React from 'react';
 import Request from 'superagent';
 import _ from 'lodash';
 import moment from 'moment';
-import AppStore from '../stores/AppStore';
-import * as AppActions from '../actions/AppActions';
-import * as AppActions2 from '../actions/AppActions2';
+import renderHTML from 'react-render-html';
+import ReactModal from 'react-modal';
+import UrlStore from '../stores/UrlStore';
+import ScrapeStore from '../stores/ScrapeStore';
+import * as UrlActions from '../actions/UrlActions';
+import * as AuthActions from '../actions/AuthActions';
+import * as ScrapeActions from '../actions/ScrapeActions';
 
+const API_KEY = 'ooyHUD7ccczgN4x8J37dG3VtpLhzsLMS2BWutEVf';
 
 export default class News extends React.Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      showModal: false,
+    };
+    this.handleOpenModal = this.handleOpenModal.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
   }
 
   componentWillMount() {
-    AppStore.on('change', () => {
+    UrlStore.on('change', () => {
+      this.setState({
+        content: '',
+      });
       this.search();
+    });
+    ScrapeStore.on('change', () => {
+      // location.reload();
+      this.scrape();
     });
     this.search();
     this.sources();
   }
 
-  updateSearch() {
-    // Fire off action createUrl
-    AppActions.createUrl(this.query.value, this.query2.value);
+  handleOpenModal() {
+    this.setState({ showModal: true });
   }
 
-  updateSearch2() {
+  handleCloseModal() {
+    this.setState({ showModal: false });
+  }
+
+  updateSearch() {
     // Fire off action createUrl
-    AppActions.createUrl('test');
+    UrlActions.createUrl(this.query.value, this.query2.value);
+  }
+
+  updateSearch2(url) {
+    // Fire off action createUrl
+    this.setState({
+      url,
+    });
+    ScrapeActions.createUrl(url);
   }
 
   logout() {
     const auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(() => {
       // Fire off action getAuth
-      AppActions2.getAuth(null);
+      AuthActions.getAuth(null);
+      location.reload();
     });
+  }
+
+  search() {
+    // get url from store
+    const url = UrlStore.getUrl();
+    Request.get(url).then((response) => {
+      this.setState({
+        news: response.body.articles,
+      });
+    });
+  }
+
+  sources() {
+    // get url from store
+    const url = UrlStore.getSourceUrl();
+    Request.get(url).then((response) => {
+      this.setState({
+        sources: response.body.sources,
+      });
+    });
+  }
+
+  scrape() {
+    // get url from store
+    const url = ScrapeStore.getUrl();
+    Request.get(url)
+      .set('X-API-Key', API_KEY)
+      .set('Accept', 'application/json')
+      .end((err, response) => {
+        const content = response.body.content;
+        this.setState({
+          content: renderHTML(content),
+        });
+      });
+    this.handleOpenModal();
   }
 
   render() {
@@ -54,14 +117,24 @@ export default class News extends React.Component {
           <p>{newss.author} : {newss.description}</p>
           <p>
             <button className="btn btn-danger">
-              <a id="rm" href={newss.url} target="_blank">Read More</a>
+              <a id="rm" href={newss.url} target="_blank" rel="noopener noreferrer">
+                Read From Source
+              </a>
+            </button>
+          </p>
+          <p>
+            <button
+              className="btn btn-danger"
+              onClick={() => { this.updateSearch2(newss.url); }}
+            >
+             Read Here
             </button>
           </p>
           <hr />
         </div>
       );
     });
-    const sources = _.map(this.state.sources, (sourcess) => 
+    const sources = _.map(this.state.sources, sourcess =>
       // Display the result from the API
        (
          <option key={sourcess.id} value={sourcess.id}>{sourcess.name}</option>
@@ -77,19 +150,30 @@ export default class News extends React.Component {
             <div className="row">
               <div className="col-md-4 pull-right">
                 <br />
-                <button className="btn btn-block btn-danger btn-lg btn-huge" onClick={(event) => { this.logout(); }}>
+                <button
+                  className="btn btn-block btn-danger btn-lg btn-huge"
+                  onClick={() => { this.logout(); }}
+                >
                   Logout
                 </button>
               </div>
               <div className="col-md-4 pull-left">
                 <label htmlFor="this.query">Sources</label>
-                <select className="form-control" ref={(c) => { this.query = c; }} onChange={(event) => { this.updateSearch(); }}>
+                <select
+                  className="form-control"
+                  ref={(c) => { this.query = c; }}
+                  onChange={() => { this.updateSearch(); }}
+                >
                   {sources}
                 </select>
               </div>
               <div className="col-md-4">
                 <label htmlFor="this.query2">Sort By</label>
-                <select className="form-control" ref={(c) => { this.query2 = c; }} onChange={(event) => { this.updateSearch(); }}>
+                <select
+                  className="form-control"
+                  ref={(c) => { this.query2 = c; }}
+                  onChange={() => { this.updateSearch(); }}
+                >
                   <option value="top">Top</option>
                   <option value="latest">Latest</option>
                   <option value="popular">Popular</option>
@@ -100,28 +184,18 @@ export default class News extends React.Component {
           <div className="row">
             <ul>{news}</ul>
           </div>
+          <div>
+            <ReactModal
+              isOpen={this.state.showModal}
+              contentLabel="Minimal Modal Example"
+            >
+              <button onClick={this.handleCloseModal}>Close</button>
+              {this.state.content}
+              <button onClick={this.handleCloseModal}>Close</button>
+            </ReactModal>
+          </div>
         </div>
       </div>
     );
-  }
-
-  search() {
-    // get url from store
-    const url = AppStore.getUrl();
-    Request.get(url).then((response) => {
-      this.setState({
-        news: response.body.articles,
-      });
-    });
-  }
-
-  sources() {
-    // get url from store
-    const url = AppStore.getSourceUrl();
-    Request.get(url).then((response) => {
-      this.setState({
-        sources: response.body.sources,
-      });
-    });
   }
 }

@@ -1,12 +1,12 @@
 import EventEmitter from 'events';
 import dispatcher from '../dispatchers/dispatcher';
 
-class AppStore extends EventEmitter{
+class UrlStore extends EventEmitter {
   constructor() {
-    super ();
+    super();
     this.query = 'abc-news-au';
     this.query2 = 'top';
-    this.sourceUrl = `https://newsapi.org/v1/sources?apiKey=213327409d384371851777e7c7f78dfe`;
+    this.sourceUrl = 'https://newsapi.org/v1/sources?apiKey=213327409d384371851777e7c7f78dfe';
     this.url = `https://newsapi.org/v1/articles?source=${this.query}&sortBy=${this.query2}&apiKey=213327409d384371851777e7c7f78dfe`;
   }
 
@@ -25,13 +25,13 @@ class AppStore extends EventEmitter{
 
   handleActions(action) {
     switch (action.type) {
-      case 'CREATE_URL':{
+      case 'CREATE_URL': {
         this.createUrl(action.query, action.query2);
       }
     }
   }
 }
 
-const appStore = new AppStore;
-dispatcher.register(appStore.handleActions.bind(appStore));
-export default appStore;
+const urlStore = new UrlStore();
+dispatcher.register(urlStore.handleActions.bind(urlStore));
+export default urlStore;

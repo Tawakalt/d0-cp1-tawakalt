@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "A News Application",
   "main": "dist/server.js",
+  "engines": {
+    "node": "6.10.3"
+  },
   "scripts": {
     "test": "jest --coverage",
     "start": "node dist/server.js",
@@ -34,6 +37,8 @@
     "react-dom": "^15.5.4",
     "react-google-login": "^2.8.9",
     "react-google-login-component": "^0.7.0",
+    "react-modal": "^1.7.13",
+    "react-render-html": "^0.1.6",
     "react-router-dom": "^4.1.1",
     "sass-loader": "^6.0.5",
     "superagent": "^3.5.2",
@@ -42,6 +47,7 @@
   "devDependencies": {
     "babel-jest": "^20.0.3",
     "chai": "^4.0.1",
+    "coveralls": "^2.13.1",
     "enzyme": "^2.8.2",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^15.0.1",
@@ -49,7 +55,6 @@
     "eslint-plugin-jsx-a11y": "^5.0.3",
     "eslint-plugin-react": "^7.0.1",
     "jest": "^20.0.4",
-    "jsdom-global": "^3.0.2",
     "react-test-renderer": "^15.5.4",
     "webpack-dev-server": "^2.4.5"
   }
