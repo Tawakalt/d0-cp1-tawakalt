@@ -67,14 +67,16 @@ export default class News extends React.Component {
    * @memberof News
    */
   updateSearch() {
+    UrlActions.createUrl(this.state.sourceId, this.sortby.value);
+  }
+
+  getSort() {
     // Fire off action createUrl
-    let idAndValue = this.query.value.split(',')
-    const sourceId = idAndValue[0];
+    let idAndValue = this.source.value.split(',')
     this.setState({
         sourceSortBy: idAndValue.slice(1),
+        sourceId :idAndValue[0],
       });
-
-    UrlActions.createUrl(sourceId, this.sortby.value);
   }
 
   logout() {
@@ -200,27 +202,35 @@ export default class News extends React.Component {
         </div>
         <div className="container">
             <div className="row">
-              <div className="col-md-6">
+              <div className="col-md-4">
                 <label htmlFor="this.query">Sources</label>
                 <select
                   id="selectSources"
                   className="form-control"
-                  ref={(c) => { this.query = c; }}
-                  onChange={() => { this.updateSearch(); }}
+                  ref={(c) => { this.source = c; }}
+                  onChange={() => { this.getSort(); }}
                 >
                   {sources}
                 </select>
               </div>
-              <div className="col-md-6">
+              <div className="col-md-4">
                 <label htmlFor="this.sortby">Sort By</label>
                 <select
                   id="selectSearch"
                   className="form-control"
                   ref={(c) => { this.sortby = c; }}
-                  onChange={() => { this.updateSearch(); }}
                 >
                  {sortByOptions}
                 </select>
+              </div>
+              <div className="col-md-4">
+                <label htmlFor=""></label>
+                <button
+                 className="btn btn-block btn-danger btn-md"
+                 onClick={() => { this.updateSearch(); }}
+               >
+                get news
+               </button>
               </div>
               <div className="col-md-3">
               </div>
