@@ -1,25 +1,41 @@
 import EventEmitter from 'events';
 import dispatcher from '../dispatchers/dispatcher';
 
+/**
+ * @class AuthStore
+ * @extends {EventEmitter}
+ */
 class AuthStore extends EventEmitter{
   constructor() {
     super ();
     this.auth = null;
   }
 
-  createAuth(query) {
-    this.auth = query;
+  /**
+   * @param {any} idToken 
+   * @memberof AuthStore
+   */
+  createAuth(idToken) {
+    this.auth = idToken;
     this.emit('change');
   }
 
+  /**
+   * @returns {string} this.auth
+   * @memberof AuthStore
+   */
   getAuth() {
     return this.auth;
   }
 
+  /**
+   * @param {function} action 
+   * @memberof AuthStore
+   */
   handleActions(action) {
     switch(action.type) {
       case 'GET_AUTH':{
-        this.createAuth(action.query);
+        this.createAuth(action.idToken);
       }
     }
   }

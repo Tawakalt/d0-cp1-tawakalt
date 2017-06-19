@@ -1,9 +1,16 @@
 import dispatcher from '../dispatchers/dispatcher';
 
-export function createUrl(query, query2) {
+/**
+ * 
+ * @function createUrl for newsApi call
+ * @export
+ * @param {any} source 
+ * @param {any} sortBy 
+ */
+export function createUrl(source, sortBy) {
   dispatcher.dispatch({
     type: 'CREATE_URL',
-    query,
-    query2,
+    source,
+    sortBy,
   });
 }

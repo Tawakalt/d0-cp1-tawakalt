@@ -1,32 +1,55 @@
 import EventEmitter from 'events';
 import dispatcher from '../dispatchers/dispatcher';
 
+const NEWS_API_KEY = process.env.NEWS_API_KEY;
+
+/**
+ * @class UrlStore
+ * @extends {EventEmitter}
+ */
 class UrlStore extends EventEmitter {
   constructor() {
     super();
-    this.query = 'abc-news-au';
-    this.query2 = 'top';
-    this.sourceUrl = 'https://newsapi.org/v1/sources?apiKey=213327409d384371851777e7c7f78dfe';
-    this.url = `https://newsapi.org/v1/articles?source=${this.query}&sortBy=${this.query2}&apiKey=213327409d384371851777e7c7f78dfe`;
+    this.source = 'abc-news-au';
+    this.sortBy = 'top';
+    this.sourceUrl = `https://newsapi.org/v1/sources?apiKey=${NEWS_API_KEY}`;
+    this.url = `https://newsapi.org/v1/articles?source=${this.source}&sortBy=${this.sortBy}&apiKey=${NEWS_API_KEY}`;
   }
 
-  createUrl(query, query2) {
-    this.url = `https://newsapi.org/v1/articles?source=${query}&sortBy=${query2}&apiKey=213327409d384371851777e7c7f78dfe`;
+  /**
+   * @param {string} source 
+   * @param {string} sortBy 
+   * @memberof UrlStore
+   */
+  createUrl(source, sortBy) {
+    this.url = `https://newsapi.org/v1/articles?source=${source}&sortBy=${sortBy}&apiKey=${NEWS_API_KEY}`;
     this.emit('change');
   }
 
+  /**
+   * @returns {string} this.url
+   * @memberof UrlStore
+   */
   getUrl() {
     return this.url;
   }
 
+  /**
+   * @returns {string} this.sourceUrl
+   * @memberof UrlStore
+   */
   getSourceUrl() {
     return this.sourceUrl;
   }
 
+  /**
+   * @param {function} action 
+   * @memberof UrlStore
+   */
   handleActions(action) {
     switch (action.type) {
       case 'CREATE_URL': {
-        this.createUrl(action.query, action.query2);
+        this.createUrl(action.source, action.sortBy);
       }
     }
   }

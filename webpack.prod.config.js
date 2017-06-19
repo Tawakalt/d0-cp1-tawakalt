@@ -1,5 +1,9 @@
 const path = require("path");
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const webpack = require('webpack');
+const env = require('node-env-file');
+
+env(__dirname + '/.env');
 
 const extractPlugin = new ExtractTextPlugin({
   filename: 'main.css'
@@ -42,6 +46,13 @@ const config = {
   },
   plugins: [
     extractPlugin,
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+        NEWS_API_KEY: JSON.stringify(process.env.NEWS_API_KEY),
+        MERCURY_API_KEY: JSON.stringify(process.env.MERCURY_API_KEY),
+      }
+    }),
   ]
 };
 

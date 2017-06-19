@@ -9,12 +9,12 @@ describe('AuthActions', () => {
     });
 
     test('creates auth', () => {
-      AuthActions.getAuth('query');
+      AuthActions.getAuth('idToken');
       AppDispatcher.dispatch({
         type: 'GET_AUTH',
-        query: 'query',
+        idToken: 'idToken',
       });
-      expect(AuthStore.getAuth()).toEqual('query');
+      expect(AuthStore.getAuth()).toEqual('idToken');
     });
   });
 });

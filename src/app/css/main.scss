@@ -1,3 +1,6 @@
+$primary: #0FACF3;
+$white: #fff;
+
 #l1, #my-signin2, #l2, #rm, #news {
 	font-family: "Times New Roman", Times, serif;
 }
@@ -17,8 +20,8 @@
 }
 
 #l2 {
-	font-size: 200%;
-	color: blue;
+	font-size: 1.5em;
+	color: $primary;
 	padding: 5px
 }
 
@@ -28,11 +31,21 @@
 }
 
 #news {
-	background-color: blue;
-	color: red;
+	background-color: $primary;
+	color: $white;
 	padding: 5px;
-	font-style: oblique;
+	margin: 0 0 20px 0;
 	font-size: 40px;
 	font-family: "Times New Roman", Times, serif;
 	text-align: center;
+}
+
+.news-articles {
+	margin: 10px 0 0 0;
+	img {
+		max-width: 100%;
+	}
+}
+.news-articles:nth-child(3n+1) {
+	clear: both;
 }
