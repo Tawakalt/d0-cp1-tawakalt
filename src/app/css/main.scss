@@ -10,7 +10,10 @@ $white: #fff;
 	font-style: oblique;
 	font-size: 40px;
 	text-align: center;
-	padding: 70px 0;
+	padding: 50px 0;
+	margin-top: 150px;
+	margin-left: 350px;
+	width: 40%;
 }
 
 #my-signin2 {
@@ -48,4 +51,8 @@ $white: #fff;
 }
 .news-articles:nth-child(3n+1) {
 	clear: both;
+}
+
+.login{
+	background-color: lightblue;
 }

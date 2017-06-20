@@ -17,7 +17,7 @@ describe('Login', () => {
   });
 
   test('should have a div with class container', () => {
-    expect(wrapper.find('.container')).toHaveLength(1);
+    expect(wrapper.find('.container-fluid')).toHaveLength(1);
   });
 
   test('should have a div with id my-signin2', () => {

@@ -4,7 +4,7 @@ import _ from 'lodash';
 import moment from 'moment';
 import renderHTML from 'react-render-html';
 import ReactModal from 'react-modal';
-import Utils from '../utils';
+// import Utils from '../utils';
 import UrlStore from '../stores/UrlStore';
 import ScrapeStore from '../stores/ScrapeStore';
 import * as UrlActions from '../actions/UrlActions';

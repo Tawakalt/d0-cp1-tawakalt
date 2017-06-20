@@ -60,12 +60,12 @@ export default class Login extends React.Component {
   render() {
     let displayText = "Sign in with Google";
     return (
-    <div>
-      <div className="container" id='l1'>
-        <h1>Sign In with your gmail account and get instant access to news!!!</h1>
-      </div>
-      <div className="row">
-       <div id="my-signin2"></div>
+      <div className="container-fluid login">
+        <div className="row">
+          <div className="col-md-4" id='l1'>
+           <h1>Sign In with your gmail account and get instant access to news!!!</h1>
+           <div id="my-signin2"></div>
+         </div>
       </div>
     </div>
     );
