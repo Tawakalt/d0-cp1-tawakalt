@@ -32,7 +32,7 @@ export default class News extends React.Component {
    * 
    * @memberof News
    */
-  componentWillMount() {
+  componentDidMount() {
     UrlStore.on('change', () => {
       this.setState({
         content: '',
