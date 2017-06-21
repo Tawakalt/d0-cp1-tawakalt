@@ -11,4 +11,5 @@ export function getAuth(idToken) {
     type: 'GET_AUTH',
     idToken,
   });
+  return true;
 }

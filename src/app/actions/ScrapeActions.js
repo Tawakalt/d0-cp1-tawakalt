@@ -11,4 +11,5 @@ export function createUrl(url) {
     type: 'SCRAPE_URL',
     url,
   });
+  return true;
 }

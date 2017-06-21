@@ -13,4 +13,5 @@ export function createUrl(source, sortBy) {
     source,
     sortBy,
   });
+  return true;
 }
