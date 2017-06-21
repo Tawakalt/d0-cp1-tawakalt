@@ -7,8 +7,7 @@ import * as AuthActions from '../src/app/actions/AuthActions';
 describe('Login', () => {
   const wrapper = shallow(<Login />);
   const componentDidMount = wrapper.instance().componentDidMount();
-  AuthActions.getAuth('id_token')
-
+  
   test('should have an h1 tag', () => {
     expect(wrapper.find('h1')).toHaveLength(1);
   });
@@ -18,7 +17,7 @@ describe('Login', () => {
   });
 
   test('should have a div with class container', () => {
-    expect(wrapper.find('.container')).toHaveLength(1);
+    expect(wrapper.find('.container-fluid')).toHaveLength(1);
   });
 
   test('should have a div with id my-signin2', () => {

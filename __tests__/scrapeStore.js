@@ -1,6 +1,5 @@
 import ScrapeStore from '../src/app/stores/ScrapeStore';
 import AppDispatcher from '../src/app/dispatchers/dispatcher';
-import * as ScrapeActions from '../src/app/actions/ScrapeActions';
 
 describe('ScrapeActions', () => {
   describe('ScrapeStore', () => {
@@ -9,7 +8,6 @@ describe('ScrapeActions', () => {
     });
 
     test('creates url', () => {
-      ScrapeActions.createUrl('url');
       AppDispatcher.dispatch({
         type: 'SCRAPE_URL',
         url: 'url',

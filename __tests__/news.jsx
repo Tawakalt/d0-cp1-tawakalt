@@ -1,4 +1,5 @@
 import React from 'react';
+import sinon from 'sinon';
 import { shallow } from 'enzyme';
 import News from '../src/app/components/News.jsx';
 
@@ -13,16 +14,12 @@ describe('News', () => {
     expect(wrapper.find('select')).toHaveLength(2);
   });
 
-  test('should have 2 label tags', () => {
-    expect(wrapper.find('label')).toHaveLength(2);
+  test('should have 3 label tags', () => {
+    expect(wrapper.find('label')).toHaveLength(3);
   });
 
-  test('should have 9 div tags', () => {
-    expect(wrapper.find('div')).toHaveLength(10);
-  });
-
-  test('should have 3 p tags', () => {
-    expect(wrapper.find('p')).toHaveLength(0);
+  test('should have 11 div tags', () => {
+    expect(wrapper.find('div')).toHaveLength(11);
   });
 
   it('should have an h1 tag', () => {
@@ -34,7 +31,7 @@ describe('News', () => {
   });
 
   test('should have a button', () => {
-    expect(wrapper.find('button')).toHaveLength(3);
+    expect(wrapper.find('button')).toHaveLength(4);
   });
 
   test('should have a div with class container', () => {

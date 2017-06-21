@@ -1,8 +1,15 @@
 import dispatcher from '../dispatchers/dispatcher';
 
-export function getAuth(query) {
+/**
+ * getAuth to store the idToken
+ * @return {nothing} returns nothing
+ * @export
+ * @param {any} idToken
+ */
+export function getAuth(idToken) {
   dispatcher.dispatch({
     type: 'GET_AUTH',
-    query,
+    idToken,
   });
+  return true;
 }
