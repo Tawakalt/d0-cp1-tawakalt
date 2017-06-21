@@ -141,13 +141,13 @@ export default class News extends React.Component {
           <h3 id="l2">{newss.title}</h3>
           <i>{(moment(new Date(newss.publishedAt))).format('LLLL')}</i>
           <p>{newss.author} : {newss.description}</p>
-          <button className="btn btn-danger pull-left">
+          <button className="btn btn-info">
             <a id="rm" className="" href={newss.url} target="_blank" rel="noopener noreferrer">
               Read From Source
             </a>
-          </button>
+          </button>&nbsp;
           <button
-            className="btn btn-danger pull-right"
+            className="btn btn-info"
             onClick={() => { this.updateSearch2(newss.url); }}
           >
             Read Here
@@ -171,17 +171,22 @@ export default class News extends React.Component {
   
     return (
       <div>
-        <div className="container-fluid" id="news">
-          <h1>NEWS!!!</h1>
-          <div className="pull-right">
-            <button
-              className="btn btn-block btn-danger btn-md"
-              onClick={() => { Utils.logout(); }}
-            >
-              Logout
-            </button>
+        <nav className="navbar navbar-default navbar-inverse navbar-fixed-top">
+          <div className="container-fluid">
+            <div className="navbar-header">
+              <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span className="sr-only">Toggle navigation</span>
+                <span className="icon-bar"></span>
+                <span className="icon-bar"></span>
+                <span className="icon-bar"></span>
+              </button>
+              <p className="navbar-brand" id="news">News!!!</p>
+            </div>
+           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <button  className="btn btn-danger navbar-right logout" onClick={() => { Utils.logout(); }}>Logout</button>
           </div>
-        </div>
+         </div>
+        </nav>
         <div className="container">
             <div className="row">
               <div className="col-md-4">
@@ -208,10 +213,10 @@ export default class News extends React.Component {
               <div className="col-md-4">
                 <label htmlFor=""></label>
                 <button
-                 className="btn btn-block btn-danger btn-md"
+                 className="btn btn-block btn-info btn-md"
                  onClick={() => { this.updateSearch(); }}
                >
-                get news
+                Get News
                </button>
               </div>
               <div className="col-md-3">
@@ -225,9 +230,24 @@ export default class News extends React.Component {
               isOpen={this.state.showModal}
               contentLabel="Minimal Modal Example"
             >
-              <button onClick={this.handleCloseModal}>Close</button>
-              {this.state.content}
-              <button onClick={this.handleCloseModal}>Close</button>
+              
+             <nav className="navbar navbar-default navbar-inverse navbar-fixed-bottom">
+               <div className="container-fluid">
+                 <div className="navbar-header">
+                  <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2" aria-expanded="false">
+                    <span className="sr-only">Toggle navigation</span>
+                    <span className="icon-bar"></span>
+                    <span className="icon-bar"></span>
+                    <span className="icon-bar"></span>
+                  </button>
+                  <p className="navbar-brand" id="news">Close Modal</p>
+                </div>
+                <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                  <button  className="btn btn-warning navbar-right" onClick={this.handleCloseModal}>Close</button>
+                </div>
+              </div>
+             </nav>
+             {this.state.content}
             </ReactModal>
           </div>
         </div>

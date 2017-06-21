@@ -1,5 +1,6 @@
 $primary: #0FACF3;
 $white: #fff;
+$font: 'Lobster', cursive;
 
 #l1, #my-signin2, #l2, #rm, #news {
 	font-family: "Times New Roman", Times, serif;
@@ -32,15 +33,25 @@ $white: #fff;
 	color: white;
 	padding: 5px
 }
+.nav {
+	background-color: $primary;
+}
 
 #news {
-	background-color: $primary;
 	color: $white;
-	padding: 5px;
-	margin: 0 0 20px 0;
-	font-size: 40px;
-	font-family: "Times New Roman", Times, serif;
+	font-family: $font;
 	text-align: center;
+}
+div#news p{
+ font-size: 90px;
+}
+div button.logout {
+	margin-top: 12px;
+	margin-right: 20px;
+}
+
+.container {
+	margin-top: 100px;
 }
 
 .news-articles {
