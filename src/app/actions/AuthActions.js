@@ -1,10 +1,10 @@
 import dispatcher from '../dispatchers/dispatcher';
 
 /**
- * 
- * @function getAuth to store the idToken
+ * getAuth to store the idToken
+ * @return {nothing} returns nothing
  * @export
- * @param {any} idToken 
+ * @param {any} idToken
  */
 export function getAuth(idToken) {
   dispatcher.dispatch({

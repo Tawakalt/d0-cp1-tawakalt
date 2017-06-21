@@ -4,7 +4,7 @@ import _ from 'lodash';
 import moment from 'moment';
 import renderHTML from 'react-render-html';
 import ReactModal from 'react-modal';
-// import Utils from '../utils';
+import Utils from '../utils';
 import UrlStore from '../stores/UrlStore';
 import ScrapeStore from '../stores/ScrapeStore';
 import * as UrlActions from '../actions/UrlActions';
@@ -79,15 +79,6 @@ export default class News extends React.Component {
       });
   }
 
-  logout() {
-      const auth2 = gapi.auth2.getAuthInstance();
-      auth2.signOut().then(() => {
-      // Fire off action getAuth
-      AuthActions.getAuth(null);
-      location.reload();
-    });
-  }
-
   /**
    * @param {any} url 
    * 
@@ -106,9 +97,7 @@ export default class News extends React.Component {
    * @memberof News
    */
   search() {
-    // get url from store
-    const url = UrlStore.getUrl();
-    Request.get(url).then((response) => {
+    Utils.search().then(response => {
       this.setState({
         news: response.body.articles,
       });
@@ -120,32 +109,25 @@ export default class News extends React.Component {
    * @memberof News
    */
   sources() {
-    // get url from store
-    const url = UrlStore.getSourceUrl();
-    Request.get(url).then((response) => {
+    Utils.sources().then(response => {
       this.setState({
         sources: response.body.sources,
         sourceSortBy: ['top'],
       });
-    });
+    })
   }
 
   /**
    * @memberof News
    */
   scrape() {
-    // get url from store
-    const url = ScrapeStore.getUrl();
-    Request.get(url)
-      .set('X-API-Key', {MERCURY_API_KEY})
-      .set('Accept', 'application/json')
-      .end((err, response) => {
-        const content = response.body.content;
+    Utils.scrape().then(response => {
+      const content = response.body.content;
         this.setState({
           content: renderHTML(content),
         });
-      });
-    this.handleOpenModal();
+        this.handleOpenModal();
+    })
   }
 
   render() {
@@ -194,7 +176,7 @@ export default class News extends React.Component {
           <div className="pull-right">
             <button
               className="btn btn-block btn-danger btn-md"
-              onClick={() => { this.logout(); }}
+              onClick={() => { Utils.logout(); }}
             >
               Logout
             </button>

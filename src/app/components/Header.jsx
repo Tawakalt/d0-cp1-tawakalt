@@ -4,9 +4,7 @@ import News from './News.jsx';
 import Login from './Login.jsx';
 import AuthStore from '../stores/AuthStore';
 
-/**
- * 
- * 
+/** 
  * @export
  * @class Header
  * @extends {React.Component}
@@ -19,9 +17,6 @@ export default class Header extends React.Component {
   }
 
   /**
-   * 
-   * 
-   * 
    * @memberof Header
    */
   componentWillMount() {
@@ -29,9 +24,6 @@ export default class Header extends React.Component {
   }
 
   /**
-   * 
-   * 
-   * 
    * @memberof Header
    */
   componentWillUnmount() {
@@ -39,9 +31,7 @@ export default class Header extends React.Component {
   }
 
   /**
-   * 
-   * 
-   * @function updateState set auth value
+   * updateState: set auth value
    * @memberof Header
    */
   updateState() {
@@ -52,10 +42,7 @@ export default class Header extends React.Component {
   }
 
   /**
-   * 
-   * 
    * @returns DOM elements
-   * 
    * @memberof Header
    */
   render() {

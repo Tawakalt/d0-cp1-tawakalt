@@ -1,11 +1,11 @@
 import dispatcher from '../dispatchers/dispatcher';
 
 /**
- * 
- * @function createUrl for newsApi call
+ * createUrl for newsApi call
+ * @return {nothing} does not return anything
  * @export
- * @param {any} source 
- * @param {any} sortBy 
+ * @param {any} source
+ * @param {any} sortBy
  */
 export function createUrl(source, sortBy) {
   dispatcher.dispatch({
