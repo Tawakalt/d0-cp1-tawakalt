@@ -4,14 +4,20 @@ import _ from 'lodash';
 import moment from 'moment';
 import renderHTML from 'react-render-html';
 import ReactModal from 'react-modal';
+import Utils from '../utils';
 import UrlStore from '../stores/UrlStore';
 import ScrapeStore from '../stores/ScrapeStore';
 import * as UrlActions from '../actions/UrlActions';
 import * as AuthActions from '../actions/AuthActions';
 import * as ScrapeActions from '../actions/ScrapeActions';
 
-const API_KEY = 'ooyHUD7ccczgN4x8J37dG3VtpLhzsLMS2BWutEVf';
+const MERCURY_API_KEY = process.env.MERCURY_API_KEY;
 
+/**
+ * @export
+ * @class News
+ * @extends {React.Component}
+ */
 export default class News extends React.Component {
   constructor() {
     super();
@@ -22,7 +28,11 @@ export default class News extends React.Component {
     this.handleCloseModal = this.handleCloseModal.bind(this);
   }
 
-  componentWillMount() {
+  /** 
+   * 
+   * @memberof News
+   */
+  componentDidMount() {
     UrlStore.on('change', () => {
       this.setState({
         content: '',
@@ -30,27 +40,51 @@ export default class News extends React.Component {
       this.search();
     });
     ScrapeStore.on('change', () => {
-      // location.reload();
       this.scrape();
     });
-    this.search();
     this.sources();
+    this.search();
   }
 
+  /** 
+   * @function handleOpenModal
+   * @memberof News
+   */
   handleOpenModal() {
     this.setState({ showModal: true });
   }
 
+  /**
+   * @function handleCloseModal
+   * @memberof News
+   */
   handleCloseModal() {
     this.setState({ showModal: false });
   }
 
-  updateSearch() {
-    // Fire off action createUrl
-    UrlActions.createUrl(this.query.value, this.query2.value);
+  /**
+   * handleCloseModal
+   * @memberof News
+   */
+  createUrl() {
+    UrlActions.createUrl(this.state.sourceId, this.sortby.value);
   }
 
-  updateSearch2(url) {
+  getSort() {
+    // Fire off action createUrl
+    let idAndValue = this.source.value.split(',')
+    this.setState({
+        sourceSortBy: idAndValue.slice(1),
+        sourceId :idAndValue[0],
+      });
+  }
+
+  /**
+   * @param {any} url 
+   * 
+   * @memberof News
+   */
+  createScrapeUrl(url) {
     // Fire off action createUrl
     this.setState({
       url,
@@ -58,140 +92,162 @@ export default class News extends React.Component {
     ScrapeActions.createUrl(url);
   }
 
-  logout() {
-    const auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(() => {
-      // Fire off action getAuth
-      AuthActions.getAuth(null);
-      location.reload();
-    });
-  }
-
+  /**
+   * 
+   * @memberof News
+   */
   search() {
-    // get url from store
-    const url = UrlStore.getUrl();
-    Request.get(url).then((response) => {
+    Utils.search().then(response => {
       this.setState({
         news: response.body.articles,
       });
     });
   }
 
+  /**
+   * 
+   * @memberof News
+   */
   sources() {
-    // get url from store
-    const url = UrlStore.getSourceUrl();
-    Request.get(url).then((response) => {
+    Utils.sources().then(response => {
       this.setState({
         sources: response.body.sources,
+        sourceSortBy: ['top'],
       });
-    });
+    })
   }
 
+  /**
+   * @memberof News
+   */
   scrape() {
-    // get url from store
-    const url = ScrapeStore.getUrl();
-    Request.get(url)
-      .set('X-API-Key', API_KEY)
-      .set('Accept', 'application/json')
-      .end((err, response) => {
-        const content = response.body.content;
+    Utils.scrape().then(response => {
+      const content = response.body.content;
         this.setState({
           content: renderHTML(content),
         });
-      });
-    this.handleOpenModal();
+        this.handleOpenModal();
+    })
   }
 
   render() {
-    const news = _.map(this.state.news, (newss) => {
+    const news = _.map(this.state.news, (mappedNews) => {
       // create key
-      const id = newss.publishedAt + newss.title;
+      const id = mappedNews.publishedAt + mappedNews.title;
       // Display the result from the API
       return (
-        <div className="container" key={id}>
-          <h3 id="l2">{newss.title}</h3>
-          <img alt="" src={newss.urlToImage} />
-          <p>
-            <i>{(moment(new Date(newss.publishedAt))).format('LLLL')}</i>
-          </p>
-          <p>{newss.author} : {newss.description}</p>
-          <p>
-            <button className="btn btn-danger">
-              <a id="rm" href={newss.url} target="_blank" rel="noopener noreferrer">
-                Read From Source
-              </a>
-            </button>
-          </p>
-          <p>
-            <button
-              className="btn btn-danger"
-              onClick={() => { this.updateSearch2(newss.url); }}
-            >
-             Read Here
-            </button>
-          </p>
-          <hr />
+        <div className="col-md-4 news-articles" key={id}>
+          <img alt="" src={mappedNews.urlToImage} />
+          <h3 id="l2">{mappedNews.title}</h3>
+          <i>{(moment(new Date(mappedNews.publishedAt))).format('LLLL')}</i>
+          <p>{mappedNews.author} : {mappedNews.description}</p>
+          <button className="btn btn-info">
+            <a id="rm" className="" href={mappedNews.url} target="_blank" rel="noopener noreferrer">
+              Read From Source
+            </a>
+          </button>&nbsp;
+          <button
+            className="btn btn-info"
+            onClick={() => { this.createScrapeUrl(mappedNews.url); }}
+          >
+            Read Here
+          </button>
         </div>
       );
     });
-    const sources = _.map(this.state.sources, sourcess =>
+    const sources = _.map(this.state.sources, mappedSources =>
       // Display the result from the API
        (
-         <option key={sourcess.id} value={sourcess.id}>{sourcess.name}</option>
+         <option key={mappedSources.id} value={[mappedSources.id, mappedSources.sortBysAvailable]}>{mappedSources.name}</option>
 
       ));
+
+      const sortByOptions = _.map(this.state.sourceSortBy, sortBy =>
+      // Display the result from the API
+       (
+         <option key={sortBy} value={sortBy}>{sortBy}</option>
+
+      ));
+  
     return (
       <div>
-        <div className="container-fluid" id="news">
-          <h1>NEWS!!!</h1>
-        </div>
+        <nav className="navbar navbar-default navbar-inverse navbar-fixed-top">
+          <div className="container-fluid">
+            <div className="navbar-header">
+              <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span className="sr-only">Toggle navigation</span>
+                <span className="icon-bar"></span>
+                <span className="icon-bar"></span>
+                <span className="icon-bar"></span>
+              </button>
+              <p className="navbar-brand" id="news">News!!!</p>
+            </div>
+           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <button  className="btn btn-danger navbar-right logout" onClick={() => { Utils.logout(); }}>Logout</button>
+          </div>
+         </div>
+        </nav>
         <div className="container">
-          <div className="form-group">
             <div className="row">
-              <div className="col-md-4 pull-right">
-                <br />
-                <button
-                  className="btn btn-block btn-danger btn-lg btn-huge"
-                  onClick={() => { this.logout(); }}
-                >
-                  Logout
-                </button>
-              </div>
-              <div className="col-md-4 pull-left">
+              <div className="col-md-4">
                 <label htmlFor="this.query">Sources</label>
                 <select
+                  id="selectSources"
                   className="form-control"
-                  ref={(c) => { this.query = c; }}
-                  onChange={() => { this.updateSearch(); }}
+                  ref={(c) => { this.source = c; }}
+                  onChange={() => { this.getSort(); }}
                 >
                   {sources}
                 </select>
               </div>
               <div className="col-md-4">
-                <label htmlFor="this.query2">Sort By</label>
+                <label htmlFor="this.sortby">Sort By</label>
                 <select
+                  id="selectSearch"
                   className="form-control"
-                  ref={(c) => { this.query2 = c; }}
-                  onChange={() => { this.updateSearch(); }}
+                  ref={(c) => { this.sortby = c; }}
                 >
-                  <option value="top">Top</option>
-                  <option value="latest">Latest</option>
-                  <option value="popular">Popular</option>
+                 {sortByOptions}
                 </select>
               </div>
+              <div className="col-md-4">
+                <label htmlFor=""></label>
+                <button
+                 className="btn btn-block btn-info btn-md createUrl"
+                 onClick={() => { this.createUrl(); }}
+               >
+                Get News
+               </button>
+              </div>
+              <div className="col-md-3">
+              </div>
             </div>
-          </div>
-          <div className="row">
-            <ul>{news}</ul>
-          </div>
+            <div className="row">
+              {news}
+            </div>
           <div>
             <ReactModal
               isOpen={this.state.showModal}
               contentLabel="Minimal Modal Example"
             >
-              <button onClick={this.handleCloseModal}>Close</button>
-              {this.state.content}
-              <button onClick={this.handleCloseModal}>Close</button>
+              
+             <nav className="navbar navbar-default navbar-inverse navbar-fixed-bottom">
+               <div className="container-fluid">
+                 <div className="navbar-header">
+                  <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2" aria-expanded="false">
+                    <span className="sr-only">Toggle navigation</span>
+                    <span className="icon-bar"></span>
+                    <span className="icon-bar"></span>
+                    <span className="icon-bar"></span>
+                  </button>
+                  <p className="navbar-brand" id="news">Close Modal</p>
+                </div>
+                <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                  <button  className="btn btn-warning navbar-right" onClick={this.handleCloseModal}>Close</button>
+                </div>
+              </div>
+             </nav>
+             {this.state.content}
             </ReactModal>
           </div>
         </div>
