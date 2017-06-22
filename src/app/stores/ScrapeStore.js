@@ -6,13 +6,18 @@ import dispatcher from '../dispatchers/dispatcher';
  * @extends {EventEmitter}
  */
 class ScrapeStore extends EventEmitter {
+  /**
+   * Creates an instance of ScrapeStore.
+   * @memberof ScrapeStore
+   */
   constructor() {
     super();
     this.url = '';
   }
 
   /**
-   * @param {string} url 
+   * @returns {void} returns nothing
+   * @param {string} url
    * @memberof ScrapeStore
    */
   scrapeUrl(url) {
@@ -28,8 +33,9 @@ class ScrapeStore extends EventEmitter {
     return this.url;
   }
 
-  /** 
-   * @param {function} action 
+  /**
+   * @returns {void} returns nothing
+   * @param {function} action
    * @memberof ScrapeStore
    */
   handleActions(action) {

@@ -11,6 +11,7 @@ const MERCURY_API_KEY = process.env.MERCURY_API_KEY;
  */
 export default class Utils {
     /**
+     * @returns {void} returns nothing
      * @static logout
      * @memberof Utils
      */

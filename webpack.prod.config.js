@@ -1,7 +1,6 @@
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpack = require('webpack');
-const env = require('node-env-file');
 
 const extractPlugin = new ExtractTextPlugin({
   filename: 'main.css'
@@ -18,7 +17,7 @@ const config = {
     publicPath: '/app/'
   },
   externals: {
-    'cheerio': 'window',
+    cheerio: 'window',
     'react/lib/ExecutionEnvironment': true,
     'react/lib/ReactContext': true,
   },
