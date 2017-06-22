@@ -18,12 +18,12 @@ describe('When Actions', () => {
     DispatcherMock.restore();
   });
 
-  describe('Creator Method,', () => {
-    it('getSources is called, ApiGetSources to be called', () => {
+  describe('Utils,', () => {
+    it('sources function is defined', () => {
       Utils.sources();
       expect(ApiGetSources.called).toBeTruthy();
     });
-    it('getArticles is called, ApiGetArticles to be called', () => {
+    it('search function is defined', () => {
       Utils.search();
       expect(ApiGetArticles.called).toBeTruthy();
     });
