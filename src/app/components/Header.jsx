@@ -4,6 +4,11 @@ import News from './News.jsx';
 import Login from './Login.jsx';
 import AuthStore from '../stores/AuthStore';
 
+/** 
+ * @export
+ * @class Header
+ * @extends {React.Component}
+ */
 export default class Header extends React.Component {
   constructor(props) {
     super(props);
@@ -11,14 +16,24 @@ export default class Header extends React.Component {
     this.state = {};
   }
 
+  /**
+   * @memberof Header
+   */
   componentWillMount() {
     AuthStore.on('change', this.updateState);
   }
 
+  /**
+   * @memberof Header
+   */
   componentWillUnmount() {
     AuthStore.removeListener('change', this.updateState);
   }
 
+  /**
+   * updateState: set auth value
+   * @memberof Header
+   */
   updateState() {
     this.setState({
       // get auth from store
@@ -26,7 +41,10 @@ export default class Header extends React.Component {
     });
   }
 
-  // declare routes based on the value of auth
+  /**
+   * @returns DOM elements
+   * @memberof Header
+   */
   render() {
     return (
       <div>

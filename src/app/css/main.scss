@@ -1,3 +1,7 @@
+$primary: #0FACF3;
+$white: #fff;
+$font: 'Lobster', cursive;
+
 #l1, #my-signin2, #l2, #rm, #news {
 	font-family: "Times New Roman", Times, serif;
 }
@@ -7,7 +11,10 @@
 	font-style: oblique;
 	font-size: 40px;
 	text-align: center;
-	padding: 70px 0;
+	padding: 50px 0;
+	margin-top: 150px;
+	margin-left: 350px;
+	width: 40%;
 }
 
 #my-signin2 {
@@ -17,8 +24,8 @@
 }
 
 #l2 {
-	font-size: 200%;
-	color: blue;
+	font-size: 1.5em;
+	color: $primary;
 	padding: 5px
 }
 
@@ -26,13 +33,37 @@
 	color: white;
 	padding: 5px
 }
+.nav {
+	background-color: $primary;
+}
 
 #news {
-	background-color: blue;
-	color: red;
-	padding: 5px;
-	font-style: oblique;
-	font-size: 40px;
-	font-family: "Times New Roman", Times, serif;
+	color: $white;
+	font-family: $font;
 	text-align: center;
+}
+div#news p{
+ font-size: 90px;
+}
+div button.logout {
+	margin-top: 12px;
+	margin-right: 20px;
+}
+
+.container {
+	margin-top: 100px;
+}
+
+.news-articles {
+	margin: 10px 0 0 0;
+	img {
+		max-width: 100%;
+	}
+}
+.news-articles:nth-child(3n+1) {
+	clear: both;
+}
+
+.login{
+	background-color: lightblue;
 }
