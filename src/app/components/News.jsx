@@ -66,7 +66,7 @@ export default class News extends React.Component {
    * handleCloseModal
    * @memberof News
    */
-  updateSearch() {
+  createUrl() {
     UrlActions.createUrl(this.state.sourceId, this.sortby.value);
   }
 
@@ -84,7 +84,7 @@ export default class News extends React.Component {
    * 
    * @memberof News
    */
-  updateSearch2(url) {
+  createScrapeUrl(url) {
     // Fire off action createUrl
     this.setState({
       url,
@@ -131,34 +131,34 @@ export default class News extends React.Component {
   }
 
   render() {
-    const news = _.map(this.state.news, (newss) => {
+    const news = _.map(this.state.news, (mappedNews) => {
       // create key
-      const id = newss.publishedAt + newss.title;
+      const id = mappedNews.publishedAt + mappedNews.title;
       // Display the result from the API
       return (
         <div className="col-md-4 news-articles" key={id}>
-          <img alt="" src={newss.urlToImage} />
-          <h3 id="l2">{newss.title}</h3>
-          <i>{(moment(new Date(newss.publishedAt))).format('LLLL')}</i>
-          <p>{newss.author} : {newss.description}</p>
+          <img alt="" src={mappedNews.urlToImage} />
+          <h3 id="l2">{mappedNews.title}</h3>
+          <i>{(moment(new Date(mappedNews.publishedAt))).format('LLLL')}</i>
+          <p>{mappedNews.author} : {mappedNews.description}</p>
           <button className="btn btn-info">
-            <a id="rm" className="" href={newss.url} target="_blank" rel="noopener noreferrer">
+            <a id="rm" className="" href={mappedNews.url} target="_blank" rel="noopener noreferrer">
               Read From Source
             </a>
           </button>&nbsp;
           <button
             className="btn btn-info"
-            onClick={() => { this.updateSearch2(newss.url); }}
+            onClick={() => { this.createScrapeUrl(mappedNews.url); }}
           >
             Read Here
           </button>
         </div>
       );
     });
-    const sources = _.map(this.state.sources, sourcess =>
+    const sources = _.map(this.state.sources, mappedSources =>
       // Display the result from the API
        (
-         <option key={sourcess.id} value={[sourcess.id, sourcess.sortBysAvailable]}>{sourcess.name}</option>
+         <option key={mappedSources.id} value={[mappedSources.id, mappedSources.sortBysAvailable]}>{mappedSources.name}</option>
 
       ));
 
@@ -213,8 +213,8 @@ export default class News extends React.Component {
               <div className="col-md-4">
                 <label htmlFor=""></label>
                 <button
-                 className="btn btn-block btn-info btn-md"
-                 onClick={() => { this.updateSearch(); }}
+                 className="btn btn-block btn-info btn-md createUrl"
+                 onClick={() => { this.createUrl(); }}
                >
                 Get News
                </button>
