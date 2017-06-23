@@ -5,14 +5,19 @@ import dispatcher from '../dispatchers/dispatcher';
  * @class AuthStore
  * @extends {EventEmitter}
  */
-class AuthStore extends EventEmitter{
+class AuthStore extends EventEmitter {
+  /**
+   * Creates an instance of AuthStore.
+   * @memberof AuthStore
+   */
   constructor() {
-    super ();
+    super();
     this.auth = null;
   }
 
   /**
-   * @param {any} idToken 
+   * @returns {void} returns nothing
+   * @param {any} idToken
    * @memberof AuthStore
    */
   createAuth(idToken) {
@@ -29,18 +34,19 @@ class AuthStore extends EventEmitter{
   }
 
   /**
-   * @param {function} action 
+   * @returns {void} returns nothing
+   * @param {function} action
    * @memberof AuthStore
    */
   handleActions(action) {
-    switch(action.type) {
-      case 'GET_AUTH':{
+    switch (action.type) {
+      case 'GET_AUTH': {
         this.createAuth(action.idToken);
       }
     }
   }
 }
 
-const authStore = new AuthStore;
+const authStore = new AuthStore();
 dispatcher.register(authStore.handleActions.bind(authStore));
 export default authStore;

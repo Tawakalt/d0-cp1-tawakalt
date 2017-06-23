@@ -8,6 +8,10 @@ const NEWS_API_KEY = process.env.NEWS_API_KEY;
  * @extends {EventEmitter}
  */
 class UrlStore extends EventEmitter {
+  /**
+   * Creates an instance of UrlStore.
+   * @memberof UrlStore
+   */
   constructor() {
     super();
     this.source = 'abc-news-au';
@@ -17,8 +21,9 @@ class UrlStore extends EventEmitter {
   }
 
   /**
-   * @param {string} source 
-   * @param {string} sortBy 
+   * @returns {void} returns nothing
+   * @param {string} source
+   * @param {string} sortBy
    * @memberof UrlStore
    */
   createUrl(source, sortBy) {
@@ -43,7 +48,8 @@ class UrlStore extends EventEmitter {
   }
 
   /**
-   * @param {function} action 
+   * @returns {void} returns nothing
+   * @param {function} action
    * @memberof UrlStore
    */
   handleActions(action) {
