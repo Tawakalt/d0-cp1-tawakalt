@@ -10,7 +10,6 @@ engines:
         enabled: false
     config:
       languages:
-      - ruby:
       - javascript:
 ratings:
   paths:
