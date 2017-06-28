@@ -5,8 +5,10 @@ import Login from './Login.jsx';
 import AuthStore from '../stores/AuthStore';
 
 /** 
+ * Header Component
+ * @description Declares Routes
  * @export
- * @class Header
+ * @class
  * @extends {React.Component}
  */
 export default class Header extends React.Component {
@@ -17,22 +19,33 @@ export default class Header extends React.Component {
   }
 
   /**
+   * componentWillMount
+   * @description Listens to an onchange event from the AuthStore
+   * @method
    * @memberof Header
+   * @returns {void}
    */
   componentWillMount() {
     AuthStore.on('change', this.updateState);
   }
 
   /**
+   * componentWillMount
+   * @description Listens to an onchange event from the AuthStore
+   * @method
    * @memberof Header
+   * @returns {void}
    */
   componentWillUnmount() {
     AuthStore.removeListener('change', this.updateState);
   }
 
   /**
-   * updateState: set auth value
+   * updateState
+   * @description sets the state for auth
+   * @method
    * @memberof Header
+   * @returns {void}
    */
   updateState() {
     this.setState({
@@ -41,8 +54,11 @@ export default class Header extends React.Component {
     });
   }
 
+  
   /**
-   * @returns DOM elements
+   * @description declares the routes
+   * @method
+   * @returns {div} div
    * @memberof Header
    */
   render() {

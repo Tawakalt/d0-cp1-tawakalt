@@ -4,12 +4,13 @@ import dispatcher from '../dispatchers/dispatcher';
 const NEWS_API_KEY = process.env.NEWS_API_KEY;
 
 /**
- * @class UrlStore
+ * @description Stores NewsApi Url-Related Details
+ * @class
  * @extends {EventEmitter}
  */
 class UrlStore extends EventEmitter {
   /**
-   * Creates an instance of UrlStore.
+   * @description Creates an instance of UrlStore.
    * @memberof UrlStore
    */
   constructor() {
@@ -21,7 +22,8 @@ class UrlStore extends EventEmitter {
   }
 
   /**
-   * @returns {void} returns nothing
+   * @description Reassigns url based on the selected source and sortBy option
+   * @returns {void}
    * @param {string} source
    * @param {string} sortBy
    * @memberof UrlStore
@@ -32,6 +34,7 @@ class UrlStore extends EventEmitter {
   }
 
   /**
+   * @description Returns the url
    * @returns {string} this.url
    * @memberof UrlStore
    */
@@ -40,6 +43,7 @@ class UrlStore extends EventEmitter {
   }
 
   /**
+   * @description Returns the source url
    * @returns {string} this.sourceUrl
    * @memberof UrlStore
    */
@@ -48,7 +52,8 @@ class UrlStore extends EventEmitter {
   }
 
   /**
-   * @returns {void} returns nothing
+   * @description Handles Url actions
+   * @returns {void}
    * @param {function} action
    * @memberof UrlStore
    */

@@ -14,8 +14,10 @@ import * as ScrapeActions from '../actions/ScrapeActions';
 const MERCURY_API_KEY = process.env.MERCURY_API_KEY;
 
 /**
+ * News Component
+ * @description Handles News Functionalities
  * @export
- * @class News
+ * @class
  * @extends {React.Component}
  */
 export default class News extends React.Component {
@@ -28,9 +30,12 @@ export default class News extends React.Component {
     this.handleCloseModal = this.handleCloseModal.bind(this);
   }
 
-  /** 
-   * 
-   * @memberof News
+  /**
+   * componentDidMount
+   * @description Listens to an onchange event from stores
+   * @method
+   * @memberof news
+   * @returns {void}
    */
   componentDidMount() {
     UrlStore.on('change', () => {
@@ -46,32 +51,47 @@ export default class News extends React.Component {
     this.search();
   }
 
-  /** 
-   * @function handleOpenModal
+  /**
+   * handleOpenModal
+   * @description sets the state for showModal
+   * @method
    * @memberof News
+   * @returns {void}
    */
   handleOpenModal() {
     this.setState({ showModal: true });
   }
 
   /**
-   * @function handleCloseModal
+   * handleCloseModal
+   * @description sets the state for showModal
+   * @method
    * @memberof News
+   * @returns {void}
    */
   handleCloseModal() {
     this.setState({ showModal: false });
   }
 
   /**
-   * handleCloseModal
+   * createUrl
+   * @description fires off an action
+   * @method
    * @memberof News
+   * @returns {void}
    */
   createUrl() {
     UrlActions.createUrl(this.state.sourceId, this.sortby.value);
   }
 
+  /**
+   * getSort
+   * @description set states for sourceSortBy and sourceId
+   * @method
+   * @memberof News
+   * @returns {void}
+   */
   getSort() {
-    // Fire off action createUrl
     let idAndValue = this.source.value.split(',')
     this.setState({
         sourceSortBy: idAndValue.slice(1),
@@ -80,9 +100,12 @@ export default class News extends React.Component {
   }
 
   /**
-   * @param {any} url 
-   * 
+   * createScrapeUrl
+   * @description set state for url and fires of an action 
+   * @method
    * @memberof News
+   * @param {string} url
+   * @returns {void}
    */
   createScrapeUrl(url) {
     // Fire off action createUrl
@@ -93,8 +116,11 @@ export default class News extends React.Component {
   }
 
   /**
-   * 
+   * search
+   * @description calls an external function and set state for news
+   * @method
    * @memberof News
+   * @returns {void}
    */
   search() {
     Utils.search().then(response => {
@@ -105,8 +131,11 @@ export default class News extends React.Component {
   }
 
   /**
-   * 
+   * sources
+   * @description calls an external function and set state for sources and sourceSortBy
+   * @method
    * @memberof News
+   * @returns {void}
    */
   sources() {
     Utils.sources().then(response => {
@@ -118,7 +147,11 @@ export default class News extends React.Component {
   }
 
   /**
+   * scrape
+   * @description calls an external function, set state for content and calls handleOpenModal function
+   * @method
    * @memberof News
+   * @returns {void}
    */
   scrape() {
     Utils.scrape().then(response => {
@@ -130,6 +163,12 @@ export default class News extends React.Component {
     })
   }
 
+  /**
+   * @description renders news articles
+   * @method
+   * @returns {div} div
+   * @memberof News
+   */
   render() {
     const news = _.map(this.state.news, (mappedNews) => {
       // create key

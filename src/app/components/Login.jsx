@@ -3,10 +3,10 @@ import { GoogleLogin } from 'react-google-login-component';
 import * as AuthActions from '../actions/AuthActions';
 
 /**
- * 
- * 
+ * Login Component
+ * @description Handles Login functionalities
  * @export
- * @class Login
+ * @class 
  * @extends {React.Component}
  */
 export default class Login extends React.Component {
@@ -17,12 +17,13 @@ export default class Login extends React.Component {
     this.renderGoogleLoginButton = this.renderGoogleLoginButton.bind(this);
   }
 
-  /**
-   * 
-   * @function onSignIn fires off action to save user after login
-   * @param {any} googleUser 
-   * 
+  /** 
+   * onSignIn
+   * @description fires off action to save user after login
+   * @method
    * @memberof Login
+   * @returns {void}
+   * @param {object} googleUser
    */
   onSignIn(googleUser) {
     const id_token = googleUser.getAuthResponse().id_token;
@@ -30,10 +31,11 @@ export default class Login extends React.Component {
   }
 
   /**
-   * 
-   * 
-   * @function renderGoogleLoginButton displays the google login button
+   * renderGoogleLoginButton
+   * @description  creates the google login button
+   * @method
    * @memberof Login
+   * @returns {void}
    */
   renderGoogleLoginButton() {
     //console.log('rendering google signin button')
@@ -48,15 +50,22 @@ export default class Login extends React.Component {
   }
 
   /**
-   * 
-   * 
-   * 
+   * componentDidMount
+   * @description Listens to an event 
+   * @method
    * @memberof Login
+   * @returns {void}
    */
   componentDidMount() {
     window.addEventListener('google-loaded',this.renderGoogleLoginButton);
   }
 
+  /**
+   * @description renders SignIn text and button
+   * @method
+   * @returns {div} div
+   * @memberof Login
+   */
   render() {
     let displayText = "Sign in with Google";
     return (
