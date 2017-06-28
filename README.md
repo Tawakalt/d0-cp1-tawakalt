@@ -51,10 +51,10 @@
 
 - Navigate to a directory using your favourite terminal.
 ​- Clone this repository on that directory.
-​- Using SSH; $ git clone git@github.com:codejockie/headlines.git
-​- Using HTTP; $ git clone https://github.com/codejockie/headlines.git
+​- Using SSH; $ git clone git@github.com:Tawakalt/d0-cp1-tawakalt.git
+​- Using HTTP; $ git clone https://github.com/Tawakalt/d0-cp1-tawakalt.git
 ​- Navigate to the repo's directory
-​- $ cd headlines
+​- $ cd d0-cp1-tawakalt
 ​- Install the app's dependencies
 ​  $ npm install
 ​- Run the app
