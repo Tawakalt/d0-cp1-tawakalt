@@ -4,6 +4,7 @@ import _ from 'lodash';
 import moment from 'moment';
 import renderHTML from 'react-render-html';
 import ReactModal from 'react-modal';
+import Select from 'react-select';
 import Utils from '../utils';
 import UrlStore from '../stores/UrlStore';
 import ScrapeStore from '../stores/ScrapeStore';
@@ -28,6 +29,7 @@ export default class News extends React.Component {
     };
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
+    this.getSort = this.getSort.bind(this);
   }
 
   /**
@@ -91,12 +93,19 @@ export default class News extends React.Component {
    * @memberof News
    * @returns {void}
    */
-  getSort() {
-    let idAndValue = this.source.value.split(',')
-    this.setState({
-        sourceSortBy: idAndValue.slice(1),
-        sourceId :idAndValue[0],
+  getSort(event) {
+    if (event){
+      this.setState({ 
+        sourceId :event.id,
+        sourceSortBy: event.sortBysAvailable, 
+        sourceValue: event,
       });
+    }
+    else{
+      this.setState({ 
+        sourceValue: event,
+      });
+    }
   }
 
   /**
@@ -194,13 +203,7 @@ export default class News extends React.Component {
         </div>
       );
     });
-    const sources = _.map(this.state.sources, mappedSources =>
-      // Display the result from the API
-       (
-         <option key={mappedSources.id} value={[mappedSources.id, mappedSources.sortBysAvailable]}>{mappedSources.name}</option>
-
-      ));
-
+    
       const sortByOptions = _.map(this.state.sourceSortBy, sortBy =>
       // Display the result from the API
        (
@@ -230,14 +233,16 @@ export default class News extends React.Component {
             <div className="row">
               <div className="col-md-4">
                 <label htmlFor="this.query">Sources</label>
-                <select
-                  id="selectSources"
-                  className="form-control"
-                  ref={(c) => { this.source = c; }}
-                  onChange={() => { this.getSort(); }}
-                >
-                  {sources}
-                </select>
+                <Select
+                  name="selectSources"
+                  onChange={ this.getSort}
+                  labelKey="name"
+                  value={this.state.sourceValue}
+                  options={this.state.sources}
+                  searchable
+                  tabSelectsValue
+                  placeholder="Select News Source"
+                />
               </div>
               <div className="col-md-4">
                 <label htmlFor="this.sortby">Sort By</label>

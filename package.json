@@ -32,11 +32,12 @@
     "node-env-file": "^0.1.8",
     "node-sass": "^4.5.3",
     "react": "^15.5.4",
+    "react-dom": "^15.5.4",
     "react-google-login-component": "^0.7.0",
     "react-modal": "^1.7.13",
     "react-render-html": "^0.1.6",
-    "react-dom": "^15.5.4",
     "react-router-dom": "^4.1.1",
+    "react-select": "^1.0.0-rc.5",
     "sass-loader": "^6.0.5",
     "superagent": "^3.5.2",
     "webpack": "^2.6.1"

@@ -1,15 +1,17 @@
 import React from 'react';
 import sinon from 'sinon';
 import Request from 'superagent';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import News from '../src/app/components/News.jsx';
 import Utils from '../src/app/utils';
+import 'react-select';
 
 describe('News', () => {
 
-  const wrapper = mount(<News />);
+  const wrapper = shallow(<News />);
+  jest.dontMock('../src/app/components/News.jsx');
   const createScrapeUrl = wrapper.instance().createScrapeUrl();
-  const createUrl = wrapper.instance().createUrl();
+  // const createUrl = wrapper.instance().createUrl();
   const handleOpenModal = wrapper.instance().handleOpenModal();
   const handleCloseModal = wrapper.instance().handleCloseModal();
   const search = wrapper.instance().search();
@@ -43,14 +45,8 @@ test('calls method scrape', () => {
     expect(search).toEqual(undefined);
   });
 
-  test('onSelect selectSearch and onClick button should call updateSearch function', () => {
-    wrapper.find('#selectSearch').simulate('select');
-    wrapper.find('.createUrl').simulate('click');
-    expect(createUrl).toEqual(undefined);
-  });
-
   test('onSelect sources, function getSort should be called', () => {
-    wrapper.find('#selectSources').simulate('select');
+    wrapper.find('Select').simulate('select');
     expect(getSort).toEqual(undefined);
   });
 });
