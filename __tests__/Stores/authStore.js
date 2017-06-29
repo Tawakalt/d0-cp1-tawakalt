@@ -1,5 +1,5 @@
-import AuthStore from '../src/app/stores/AuthStore';
-import AppDispatcher from '../src/app/dispatchers/dispatcher';
+import AuthStore from '../../src/app/stores/AuthStore';
+import AppDispatcher from '../../src/app/dispatchers/dispatcher';
 
 describe('AuthActions', () => {
   describe('AuthStore', () => {

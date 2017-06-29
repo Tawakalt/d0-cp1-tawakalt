@@ -7,7 +7,7 @@
     "node": "6.10.3"
   },
   "scripts": {
-    "test": "jest --coverage",
+    "test": "jest --coverage -u",
     "start": "node dist/server.js",
     "build": "webpack -d && cp src/index.html dist/index.html && webpack-dev-server --content-base src/ --inline --hot --history-api-fallback",
     "postinstall": "webpack -p && cp src/index.html dist/index.html && cp src/server.js dist/server.js"

@@ -1,5 +1,5 @@
-import UrlStore from '../src/app/stores/UrlStore';
-import AppDispatcher from '../src/app/dispatchers/dispatcher';
+import UrlStore from '../../src/app/stores/UrlStore';
+import AppDispatcher from '../../src/app/dispatchers/dispatcher';
 
 const NEWS_API_KEY = process.env.NEWS_API_KEY;
 

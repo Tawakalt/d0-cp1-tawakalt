@@ -1,0 +1,192 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`News renders correctly 1`] = `
+<div>
+  <nav
+    className="navbar navbar-default navbar-inverse navbar-fixed-top"
+  >
+    <div
+      className="container-fluid"
+    >
+      <div
+        className="navbar-header"
+      >
+        <button
+          aria-expanded="false"
+          className="navbar-toggle collapsed"
+          data-target="#bs-example-navbar-collapse-1"
+          data-toggle="collapse"
+          type="button"
+        >
+          <span
+            className="sr-only"
+          >
+            Toggle navigation
+          </span>
+          <span
+            className="icon-bar"
+          />
+          <span
+            className="icon-bar"
+          />
+          <span
+            className="icon-bar"
+          />
+        </button>
+        <p
+          className="navbar-brand"
+          id="news"
+        >
+          Read News From Your Favourite News Source!!!
+        </p>
+      </div>
+      <div
+        className="collapse navbar-collapse"
+        id="bs-example-navbar-collapse-1"
+      >
+        <button
+          className="btn btn-danger navbar-right logout"
+          onClick={[Function]}
+        >
+          Logout
+        </button>
+      </div>
+    </div>
+  </nav>
+  <div
+    className="container"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="col-md-4"
+      >
+        <label
+          htmlFor="this.query"
+        >
+          Sources
+        </label>
+        <div
+          className="Select Select--single is-clearable is-searchable"
+          style={undefined}
+        >
+          <div
+            className="Select-control"
+            onKeyDown={[Function]}
+            onMouseDown={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            style={undefined}
+          >
+            <span
+              className="Select-multi-value-wrapper"
+              id="react-select-2--value"
+            >
+              <div
+                className="Select-placeholder"
+              >
+                Select News Source
+              </div>
+              <div
+                className="Select-input"
+                style={
+                  Object {
+                    "display": "inline-block",
+                  }
+                }
+              >
+                <input
+                  aria-activedescendant="react-select-2--value"
+                  aria-describedby={undefined}
+                  aria-expanded="false"
+                  aria-haspopup="false"
+                  aria-label={undefined}
+                  aria-labelledby={undefined}
+                  aria-owns=""
+                  className={undefined}
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  required={false}
+                  role="combobox"
+                  style={
+                    Object {
+                      "boxSizing": "content-box",
+                      "width": "5px",
+                    }
+                  }
+                  tabIndex={undefined}
+                  value=""
+                />
+                <div
+                  style={
+                    Object {
+                      "height": 0,
+                      "left": 0,
+                      "overflow": "scroll",
+                      "position": "absolute",
+                      "top": 0,
+                      "visibility": "hidden",
+                      "whiteSpace": "pre",
+                    }
+                  }
+                >
+                  
+                </div>
+              </div>
+            </span>
+            <span
+              className="Select-arrow-zone"
+              onMouseDown={[Function]}
+            >
+              <span
+                className="Select-arrow"
+                onMouseDown={[Function]}
+              />
+            </span>
+          </div>
+        </div>
+      </div>
+      <div
+        className="col-md-4"
+      >
+        <label
+          htmlFor="this.sortby"
+        >
+          Sort By
+        </label>
+        <select
+          className="form-control"
+          id="selectSearch"
+        />
+      </div>
+      <div
+        className="col-md-4"
+      >
+        <label
+          htmlFor=""
+        />
+        <button
+          className="btn btn-block btn-info btn-md createUrl"
+          onClick={[Function]}
+        >
+          Get News
+        </button>
+      </div>
+      <div
+        className="col-md-3"
+      />
+    </div>
+    <div>
+      <div
+        className="row"
+      />
+      <div>
+        <noscript />
+      </div>
+    </div>
+  </div>
+</div>
+`;

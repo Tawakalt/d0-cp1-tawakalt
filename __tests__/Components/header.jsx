@@ -1,7 +1,7 @@
 import React from 'react';
 import sinon from 'sinon';
 import { mount } from 'enzyme';
-import Header from '../src/app/components/Header.jsx';
+import Header from '../../src/app/components/Header.jsx';
 
 describe('Header', () => {
   const wrapper = mount(<Header />);
