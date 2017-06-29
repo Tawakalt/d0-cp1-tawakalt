@@ -1,8 +1,8 @@
 import React from 'react';
 
 /** 
- * Header Component
- * @description Declares Routes
+ * ScrapeNavbar Component
+ * @description Creates Navbar for scraping
  * @export
  * @class
  * @extends {React.Component}
@@ -13,10 +13,10 @@ export default class ScrapeNavbar extends React.Component {
   }
 
   /**
-   * @description declares the routes
+   * @description renders navbar
    * @method
    * @returns {div} div
-   * @memberof Header
+   * @memberof ScrapeNavbar
    */
   render() {
     return (

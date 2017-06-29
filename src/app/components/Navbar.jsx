@@ -2,8 +2,8 @@ import React from 'react';
 import Utils from '../utils';
 
 /** 
- * Header Component
- * @description Declares Routes
+ * Navbar Component
+ * @description Creates Navbar for scraping
  * @export
  * @class
  * @extends {React.Component}
@@ -15,10 +15,10 @@ export default class Navbar extends React.Component {
   }
 
   /**
-   * @description declares the routes
+   * @description creates navbar
    * @method
-   * @returns {div} div
-   * @memberof Header
+   * @returns {nav} nav
+   * @memberof Navbar
    */
   render() {
     return (
