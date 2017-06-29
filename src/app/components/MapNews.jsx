@@ -10,8 +10,8 @@ import * as ScrapeActions from '../actions/ScrapeActions';
 const MERCURY_API_KEY = process.env.MERCURY_API_KEY;
 
 /** 
- * Header Component
- * @description Declares Routes
+ * MapNews Component
+ * @description Maps and Renders News Articles
  * @export
  * @class
  * @extends {React.Component}
@@ -28,9 +28,9 @@ export default class MapNews extends React.Component {
 
   /**
    * componentDidMount
-   * @description Listens to an onchange event from stores
+   * @description Listens to an onchange event from ScrapeStore
    * @method
-   * @memberof news
+   * @memberof MapNews
    * @returns {void}
    */
   componentDidMount() {
@@ -43,7 +43,7 @@ export default class MapNews extends React.Component {
    * handleOpenModal
    * @description sets the state for showModal
    * @method
-   * @memberof News
+   * @memberof MapNews
    * @returns {void}
    */
   handleOpenModal() {
@@ -54,7 +54,7 @@ export default class MapNews extends React.Component {
    * handleCloseModal
    * @description sets the state for showModal
    * @method
-   * @memberof News
+   * @memberof MapNews
    * @returns {void}
    */
   handleCloseModal() {
@@ -65,7 +65,7 @@ export default class MapNews extends React.Component {
    * createScrapeUrl
    * @description set state for url and fires of an action 
    * @method
-   * @memberof News
+   * @memberof MapNews
    * @param {string} url
    * @returns {void}
    */
@@ -80,7 +80,7 @@ export default class MapNews extends React.Component {
    * scrape
    * @description calls an external function, set state for content and calls handleOpenModal function
    * @method
-   * @memberof News
+   * @memberof MapNews
    * @returns {void}
    */
   scrape() {
@@ -94,10 +94,10 @@ export default class MapNews extends React.Component {
   }
 
   /**
-   * @description renders news articles
+   * @description maps and renders news articles
    * @method
    * @returns {div} div
-   * @memberof News
+   * @memberof MapNews
    */
   render() {
     const news = _.map(this.props.news, (mappedNews) => {

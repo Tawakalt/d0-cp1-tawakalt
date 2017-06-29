@@ -28,7 +28,7 @@ export default class News extends React.Component {
   }
 
   /**
-   * componentDidMount
+   * componentWillMount
    * @description Listens to an onchange event from stores
    * @method
    * @memberof news
@@ -58,7 +58,7 @@ export default class News extends React.Component {
 
   /**
    * getSort
-   * @description set states for sourceSortBy and sourceId
+   * @description set states for sourceId, sourceSortBy and sourceId
    * @method
    * @memberof News
    * @returns {void}

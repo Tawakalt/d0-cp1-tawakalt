@@ -30,8 +30,8 @@ export default class Header extends React.Component {
   }
 
   /**
-   * componentWillMount
-   * @description Listens to an onchange event from the AuthStore
+   * componentWillUnmount
+   * @description removes Listener from the AuthStore
    * @method
    * @memberof Header
    * @returns {void}
