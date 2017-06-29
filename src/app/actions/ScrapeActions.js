@@ -1,10 +1,10 @@
 import dispatcher from '../dispatchers/dispatcher';
 
 /**
- * createUrl for Scraping
- * @return {nothing} returns nothing
+ * @description sets url for Scraping
+ * @return {boolean} true
  * @export
- * @param {any} url
+ * @param {string} url url to be scraped from
  */
 export function createUrl(url) {
   dispatcher.dispatch({

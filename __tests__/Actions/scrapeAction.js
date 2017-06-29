@@ -1,4 +1,4 @@
-import * as ScrapeActions from '../src/app/actions/ScrapeActions';
+import * as ScrapeActions from '../../src/app/actions/ScrapeActions';
 
 describe('ScrapeActions', () => {
   test('expect createUrl to be called', () => {

@@ -1,4 +1,4 @@
-import * as AuthActions from '../src/app/actions/AuthActions';
+import * as AuthActions from '../../src/app/actions/AuthActions';
 
 describe('AuthActions', () => {
   test('expect getAuth function to be called', () => {

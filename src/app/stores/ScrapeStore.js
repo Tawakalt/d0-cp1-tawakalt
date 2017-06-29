@@ -2,12 +2,13 @@ import EventEmitter from 'events';
 import dispatcher from '../dispatchers/dispatcher';
 
 /**
- * @class ScrapeStore
+ * @description Stores Scraping-Related Details
+ * @class
  * @extends {EventEmitter}
  */
 class ScrapeStore extends EventEmitter {
   /**
-   * Creates an instance of ScrapeStore.
+   * @description Creates an instance of ScrapeStore.
    * @memberof ScrapeStore
    */
   constructor() {
@@ -16,7 +17,8 @@ class ScrapeStore extends EventEmitter {
   }
 
   /**
-   * @returns {void} returns nothing
+   * @description Reassigns url to that of mercury
+   * @returns {void}
    * @param {string} url
    * @memberof ScrapeStore
    */
@@ -26,6 +28,7 @@ class ScrapeStore extends EventEmitter {
   }
 
   /**
+   * @description Returns the url
    * @returns {string} this.url
    * @memberof ScrapeStore
    */
@@ -34,7 +37,8 @@ class ScrapeStore extends EventEmitter {
   }
 
   /**
-   * @returns {void} returns nothing
+   * @description Handles Scrape actions
+   * @returns {void}
    * @param {function} action
    * @memberof ScrapeStore
    */

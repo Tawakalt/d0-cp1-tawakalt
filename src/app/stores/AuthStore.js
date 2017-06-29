@@ -2,12 +2,13 @@ import EventEmitter from 'events';
 import dispatcher from '../dispatchers/dispatcher';
 
 /**
- * @class AuthStore
+ * @description Stores User Authentication Details
+ * @class
  * @extends {EventEmitter}
  */
 class AuthStore extends EventEmitter {
   /**
-   * Creates an instance of AuthStore.
+   * @description Creates an instance of AuthStore.
    * @memberof AuthStore
    */
   constructor() {
@@ -16,8 +17,9 @@ class AuthStore extends EventEmitter {
   }
 
   /**
-   * @returns {void} returns nothing
-   * @param {any} idToken
+   * @description Reassigns auth to idToken
+   * @returns {void}
+   * @param {string} idToken
    * @memberof AuthStore
    */
   createAuth(idToken) {
@@ -26,6 +28,7 @@ class AuthStore extends EventEmitter {
   }
 
   /**
+   * @description Returns value for auth
    * @returns {string} this.auth
    * @memberof AuthStore
    */
@@ -34,7 +37,8 @@ class AuthStore extends EventEmitter {
   }
 
   /**
-   * @returns {void} returns nothing
+   * @description Handles Auth actions
+   * @returns {void}
    * @param {function} action
    * @memberof AuthStore
    */

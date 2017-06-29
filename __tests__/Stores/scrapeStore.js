@@ -1,5 +1,5 @@
-import ScrapeStore from '../src/app/stores/ScrapeStore';
-import AppDispatcher from '../src/app/dispatchers/dispatcher';
+import ScrapeStore from '../../src/app/stores/ScrapeStore';
+import AppDispatcher from '../../src/app/dispatchers/dispatcher';
 
 describe('ScrapeActions', () => {
   describe('ScrapeStore', () => {

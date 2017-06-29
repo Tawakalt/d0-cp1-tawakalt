@@ -1,4 +1,4 @@
-import * as UrlActions from '../src/app/actions/UrlActions';
+import * as UrlActions from '../../src/app/actions/UrlActions';
 
 describe('UrlActions', () => {
   test('expect createUrl function to be called', () => {
