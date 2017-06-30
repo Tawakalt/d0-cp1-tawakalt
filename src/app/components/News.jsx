@@ -21,7 +21,6 @@ export default class News extends React.Component {
   constructor() {
     super();
     this.state = {
-      // showModal: false,
       sourceId:'abc-news-au',
     };
     this.getSort = this.getSort.bind(this);
@@ -87,7 +86,6 @@ export default class News extends React.Component {
    */
   search() {
     Utils.search().then(response => {
-      // console.log(response.body.articles);
       this.setState({
         news: response.body.articles,
       });

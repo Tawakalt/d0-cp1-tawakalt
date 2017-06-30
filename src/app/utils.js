@@ -18,7 +18,6 @@ export default class Utils {
   static logout() {
     const auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(() => {
-      // Fire off action getAuth
       AuthActions.getAuth(null);
       location.reload();
     });
@@ -30,7 +29,6 @@ export default class Utils {
    * @memberof Utils
    */
   static search() {
-    // get url from store
     const url = UrlStore.getUrl();
     return Request.get(url).then(response => response);
   }
@@ -41,7 +39,6 @@ export default class Utils {
    * @memberof Utils
    */
   static sources() {
-    // get url from store
     const url = UrlStore.getSourceUrl();
     return Request.get(url).then(response => response);
   }
@@ -52,7 +49,6 @@ export default class Utils {
    * @memberof Utils
    */
   static scrape() {
-    // get url from store
     const url = ScrapeStore.getUrl();
     return Request.get(url)
       .set('x-api-key', MERCURY_API_KEY)

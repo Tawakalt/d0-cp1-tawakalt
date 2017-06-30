@@ -49,7 +49,6 @@ export default class Header extends React.Component {
    */
   updateState() {
     this.setState({
-      // get auth from store
       auth: AuthStore.getAuth(),
     });
   }
