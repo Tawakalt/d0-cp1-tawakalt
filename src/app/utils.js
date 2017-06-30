@@ -11,8 +11,9 @@ const MERCURY_API_KEY = process.env.MERCURY_API_KEY;
  */
 export default class Utils {
     /**
-     * @returns {void} returns nothing
-     * @static logout
+     * @description logs user out
+     * @returns {void}
+     * @static
      * @memberof Utils
      */
   static logout() {
@@ -24,6 +25,7 @@ export default class Utils {
   }
 
   /**
+   * @description makes an API call to get articles
    * @static
    * @returns {object} response
    * @memberof Utils
@@ -34,6 +36,7 @@ export default class Utils {
   }
 
   /**
+   * @description Makes an API call to get news sources
    * @static
    * @returns {object} response
    * @memberof Utils
@@ -44,6 +47,7 @@ export default class Utils {
   }
 
   /**
+   * @description Makes an API call to scrape url
    * @static
    * @returns {object} response
    * @memberof Utils
