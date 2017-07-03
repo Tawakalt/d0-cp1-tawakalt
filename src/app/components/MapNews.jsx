@@ -7,8 +7,6 @@ import ScrapeNavbar from './ScrapeNavbar.jsx';
 import ScrapeStore from '../stores/ScrapeStore';
 import * as ScrapeActions from '../actions/ScrapeActions';
 
-const MERCURY_API_KEY = process.env.MERCURY_API_KEY;
-
 /** 
  * MapNews Component
  * @description Maps and Renders News Articles
@@ -84,13 +82,24 @@ export default class MapNews extends React.Component {
    * @returns {void}
    */
   scrape() {
-    Utils.scrape().then(response => {
-      const content = response.body.content;
+    Utils.scrape().then((response => {
+      let content
+      if (response.body.content === "<body> </body>"){
+        content = "<body> <h1>Can't successfully scrape this site</h1></body>";
+      }
+      else{
+       content = response.body.content; 
+      } 
         this.setState({
           content: renderHTML(content),
         });
         this.handleOpenModal();
-    })
+    }), 
+    (error => {
+      this.setState({
+          error: renderHTML(error),
+        });
+    }))
   }
 
   /**

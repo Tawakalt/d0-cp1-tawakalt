@@ -11,7 +11,7 @@ describe('When Actions', () => {
 
   beforeEach(() => {
     DispatcherMock = sinon.spy(AppDispatcher, 'dispatch');
-    MockRequest = sinon.stub(Request, 'get').callsFake(() => Promise.resolve({ response: 'Successfull' }));
+    MockRequest = sinon.stub(Request, 'get').callsFake(() => Promise.resolve({ response: 'Successfull' }, { error: 'Error' }));
   });
   afterEach(() => {
     MockRequest.restore();

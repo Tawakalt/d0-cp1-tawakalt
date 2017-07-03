@@ -42,6 +42,7 @@ const config = {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
         NEWS_API_KEY: JSON.stringify(process.env.NEWS_API_KEY),
         MERCURY_API_KEY: JSON.stringify(process.env.MERCURY_API_KEY),
+        CLIENT_ID: JSON.stringify(process.env.CLIENT_ID),
       }
     }),
   ]

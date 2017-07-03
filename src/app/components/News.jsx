@@ -86,9 +86,16 @@ export default class News extends React.Component {
    */
   search() {
     Utils.search().then(response => {
-      this.setState({
-        news: response.body.articles,
-      });
+      if (response.body){
+        this.setState({
+          news: response.body.articles,
+        });
+      }
+      else{
+        this.setState({
+          error: 'Internet Error....',
+        });
+      } 
     });
   }
 
@@ -101,11 +108,18 @@ export default class News extends React.Component {
    */
   sources() {
     Utils.sources().then(response => {
-      this.setState({
+      if(response.body){
+        this.setState({
         sources: response.body.sources,
         sourceSortBy: ['top'],
       });
-    })
+    }
+    else {
+      this.setState({
+          error: 'Internet Error....',
+        });
+    }   
+    });
   }
 
   /**
@@ -120,50 +134,60 @@ export default class News extends React.Component {
          <option key={sortBy} value={sortBy}>{sortBy}</option>
 
       ));
-  
-    return (
-      <div>
-        <Navbar />
-        <div className="container">
-            <div className="row">
-              <div className="col-md-4">
-                <label htmlFor="this.query">Sources</label>
-                <Select
-                  name="selectSources"
-                  onChange={ this.getSort}
-                  labelKey="name"
-                  value={this.state.sourceValue}
-                  options={this.state.sources}
-                  searchable
-                  tabSelectsValue
-                  placeholder="Select News Source"
-                />
+      if (this.state.news){
+        return (
+          <div>
+            <Navbar />
+            <div className="container">
+              <div className="row">
+                <div className="col-md-4">
+                  <label htmlFor="this.query">Sources</label>
+                  <Select
+                    name="selectSources"
+                    onChange={ this.getSort}
+                    labelKey="name"
+                    value={this.state.sourceValue}
+                    options={this.state.sources}
+                    searchable
+                    tabSelectsValue
+                    placeholder="Select News Source"
+                  />
+                </div>
+                <div className="col-md-4">
+                  <label htmlFor="this.sortby">Sort By</label>
+                  <select
+                    id="selectSearch"
+                    className="form-control"
+                    ref={(c) => { this.sortby = c; }}
+                  >
+                    {sortByOptions}
+                  </select>
+                </div>
+                <div className="col-md-4">
+                  <label htmlFor=""></label>
+                  <button
+                    className="btn btn-block btn-info btn-md createUrl"
+                    onClick={() => { this.createUrl(); }}
+                  >
+                  Get News
+                  </button>
+                </div>
+                <div className="col-md-3">
+                </div>
               </div>
-              <div className="col-md-4">
-                <label htmlFor="this.sortby">Sort By</label>
-                <select
-                  id="selectSearch"
-                  className="form-control"
-                  ref={(c) => { this.sortby = c; }}
-                >
-                 {sortByOptions}
-                </select>
-              </div>
-              <div className="col-md-4">
-                <label htmlFor=""></label>
-                <button
-                 className="btn btn-block btn-info btn-md createUrl"
-                 onClick={() => { this.createUrl(); }}
-               >
-                Get News
-               </button>
-              </div>
-              <div className="col-md-3">
-              </div>
+              <MapNews news={this.state.news} />
             </div>
-            <MapNews news={this.state.news} />
-        </div>
-      </div>
-    );
+          </div>
+        );
+      }
+      else{
+        return(
+          <div>
+            <h1>{this.state.error}</h1>
+          </div>
+        );
+      }
+  
+    
   }
 }
