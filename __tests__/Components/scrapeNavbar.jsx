@@ -6,6 +6,7 @@ import ScrapeNavbar from '../../src/app/components/ScrapeNavbar.jsx';
 describe('ScrapeNavbar', () => {
   const wrapper = mount(<ScrapeNavbar />);
 
-  test('calls componentWillMount', () => {
+  test('should have a button tag ', () => {
+    expect(wrapper.find('button')).toHaveLength(1);
   });
 });

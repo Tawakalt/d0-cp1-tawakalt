@@ -24,7 +24,7 @@ describe('News', () => {
 }
 
   beforeEach(() => {
-    MockRequest = sinon.stub(Request, 'then').callsFake(() => Promise.resolve({ response: 'Successfull' }));
+    MockRequest = sinon.stub(Request, 'then').callsFake(() => Promise.resolve({ response: 'Successfull' }, { error: 'Successfull' }));
   });
   afterEach(() => {
     MockRequest.restore();
@@ -52,6 +52,4 @@ describe('News', () => {
     wrapper.find('Select').simulate('select');
     expect(getSort).toEqual(undefined);
   });
-
-  
 });

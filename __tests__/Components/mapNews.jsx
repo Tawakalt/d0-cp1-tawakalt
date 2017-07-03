@@ -16,7 +16,7 @@ describe('News', () => {
   let MockRequest;
 
   beforeEach(() => {
-    MockRequest = sinon.stub(Request, 'then').callsFake(() => Promise.resolve({ response: 'Successfull' }));
+    MockRequest = sinon.stub(Request, 'then').callsFake(() => Promise.resolve({ response: 'Successfull' }, { error: 'Error' }));
   });
   afterEach(() => {
     MockRequest.restore();

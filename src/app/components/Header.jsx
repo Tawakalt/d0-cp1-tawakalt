@@ -26,6 +26,9 @@ export default class Header extends React.Component {
    * @returns {void}
    */
   componentWillMount() {
+    this.setState({
+      auth: localStorage.getItem('id_token'),
+    });
     AuthStore.on('change', this.updateState);
   }
 
@@ -49,11 +52,9 @@ export default class Header extends React.Component {
    */
   updateState() {
     this.setState({
-      // get auth from store
-      auth: AuthStore.getAuth(),
+      auth: localStorage.getItem('id_token'),
     });
   }
-
   
   /**
    * @description declares the routes

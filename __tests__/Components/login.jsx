@@ -1,14 +1,12 @@
 import React from 'react';
-import { mount } from 'enzyme';
-import { GoogleLogin } from 'react-google-login-component';
+import { shallow } from 'enzyme';
 import Login from '../../src/app/components/Login.jsx';
 import * as AuthActions from '../../src/app/actions/AuthActions';
 
 describe('Login', () => {
-  const wrapper = mount(<Login />);
-  const componentDidMount = wrapper.instance().componentDidMount();
+  const wrapper = shallow(<Login />);
 
-  test('calls componentDidMount', () => {
-    expect(componentDidMount).toEqual(undefined);
+  test('should have a GoogleLogin tag ', () => {
+    expect(wrapper.find('GoogleLogin')).toHaveLength(1);
   });
 });
