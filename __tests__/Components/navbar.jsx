@@ -6,11 +6,13 @@ import Utils from '../../src/app/utils';
 require ('../../browserMocks.js');
 
 
-describe('Navbar', () => {
+describe('Navbar Component', () => {
   const wrapper = mount(<Navbar />);
 
-  test('onClick button, function logout should be called', () => {
-    wrapper.find('.logout').simulate('click');
-    expect(Utils.logout()).toEqual(undefined);
+  describe('#logout', () => {
+    test('should be called on Click of a button', () => {
+      wrapper.find('.logout').simulate('click');
+      expect(Utils.logout()).toEqual(undefined);
+    });
   });
 });

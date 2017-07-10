@@ -1,7 +1,9 @@
 import * as ScrapeActions from '../../src/app/actions/ScrapeActions';
 
 describe('ScrapeActions', () => {
-  test('expect createUrl to be called', () => {
-    expect(ScrapeActions.createUrl('url')).toBeTruthy();
+  describe('createUrl', () => {
+    test('expect createUrl to be called with the right parameter', () => {
+      expect(ScrapeActions.createUrl('url')).toBeTruthy();
+    });
   });
 });

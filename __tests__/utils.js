@@ -3,7 +3,7 @@ import Request from 'superagent';
 import AppDispatcher from '../src/app/dispatchers/dispatcher';
 import Utils from '../src/app/utils';
 
-describe('When Actions', () => {
+describe('Utils Class', () => {
   let DispatcherMock;
   let MockRequest;
   const ApiGetSources = sinon.spy(Utils, 'sources');
@@ -18,12 +18,15 @@ describe('When Actions', () => {
     DispatcherMock.restore();
   });
 
-  describe('Utils,', () => {
-    it('sources function is defined', () => {
+  describe('#ApiGetSources', () => {
+    it('should be called', () => {
       Utils.sources();
       expect(ApiGetSources.called).toBeTruthy();
     });
-    it('search function is defined', () => {
+  });
+
+  describe('#ApiGetArticles', () => {
+    it('should be called', () => {
       Utils.search();
       expect(ApiGetArticles.called).toBeTruthy();
     });

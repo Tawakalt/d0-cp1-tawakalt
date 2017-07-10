@@ -13,7 +13,7 @@ class ArticlesStore extends EventEmitter {
    */
   constructor() {
     super();
-    this.articles = {};
+    this.articles = null;
   }
 
   /**

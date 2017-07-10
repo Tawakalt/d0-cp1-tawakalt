@@ -1,13 +1,13 @@
 import AuthStore from '../../src/app/stores/AuthStore';
 import AppDispatcher from '../../src/app/dispatchers/dispatcher';
 
-describe('AuthActions', () => {
-  describe('AuthStore', () => {
-    test('initializes with no auth', () => {
+describe('AuthStore', () => {
+  describe('#getAuth', () => {
+    test('should exist and return null initially', () => {
       expect(AuthStore.getAuth()).toBeNull();
     });
 
-    test('creates auth', () => {
+    test('should return the dispatched idToken', () => {
       AppDispatcher.dispatch({
         type: 'GET_AUTH',
         idToken: 'idToken',
