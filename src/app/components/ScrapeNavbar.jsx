@@ -15,7 +15,7 @@ export default class ScrapeNavbar extends React.Component {
   /**
    * @description renders navbar
    * @method
-   * @returns {div} div
+   * @returns {div} navbar
    * @memberof ScrapeNavbar
    */
   render() {

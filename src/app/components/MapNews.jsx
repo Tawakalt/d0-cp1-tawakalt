@@ -31,7 +31,7 @@ export default class MapNews extends React.Component {
 
   /**
    * componentDidMount
-   * @description Listens to an onchange event from ScrapeStore
+   * @description Listens to an onchange event from the ScrapeStore and the ScrapedContentsStore
    * @method
    * @memberof MapNews
    * @returns {void}
@@ -77,10 +77,10 @@ export default class MapNews extends React.Component {
 
   /**
    * createScrapeUrl
-   * @description set state for url and fires of an action 
+   * @description set state for url and fires of an action to dispatch it to the store
    * @method
    * @memberof MapNews
-   * @param {string} url
+   * @param {string} url url of the news article desired for scraping
    * @returns {void}
    */
   createScrapeUrl(url) {
@@ -92,7 +92,7 @@ export default class MapNews extends React.Component {
 
   /**
    * scrape
-   * @description calls an external function, set state for content and calls handleOpenModal function
+   * @description calls an external function that makes the mercuryApi call, dispatches the response to the store and calls handleOpenModal function
    * @method
    * @memberof MapNews
    * @returns {void}
@@ -133,7 +133,7 @@ export default class MapNews extends React.Component {
   /**
    * @description maps and renders news articles
    * @method
-   * @returns {div} div
+   * @returns {div} news elements
    * @memberof MapNews
    */
   render() {

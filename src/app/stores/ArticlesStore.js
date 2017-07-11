@@ -19,7 +19,7 @@ class ArticlesStore extends EventEmitter {
   /**
    * @description Reassigns this.articles to the response from NewsApi
    * @returns {void}
-   * @param {string} articles
+   * @param {string} articles articles from the API call
    * @memberof ArticlesStore
    */
   createArticles(articles) {
@@ -29,7 +29,7 @@ class ArticlesStore extends EventEmitter {
 
   /**
    * @description Returns value for articles
-   * @returns {string} this.articles
+   * @returns {string} this.articles - articles from the API call
    * @memberof ArticlesStore
    */
   getArticles() {
@@ -39,7 +39,7 @@ class ArticlesStore extends EventEmitter {
   /**
    * @description Handles Articles actions
    * @returns {void}
-   * @param {function} action
+   * @param {function} action the dispatched action
    * @memberof ArticlesStore
    */
   handleActions(action) {

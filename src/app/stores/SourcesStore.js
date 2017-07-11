@@ -20,7 +20,7 @@ class SourcesStore extends EventEmitter {
   /**
    * @description Reassigns this.sources to the sources response from NewsApi
    * @returns {void}
-   * @param {string} sources
+   * @param {string} sources response from the API call
    * @memberof SourcesStore
    */
   createSources(sources) {
@@ -30,16 +30,15 @@ class SourcesStore extends EventEmitter {
 
   /**
    * @description Returns value for sources
-   * @returns {string} this.sources
-   * @memberof SourcesStore
+   * @returns {string} this.sources - response from the API call
    */
   getSources() {
     return this.sources;
   }
 
   /**
-   * @description Returns value for sources
-   * @returns {string} this.sources
+   * @description Returns value for sourceSortBy
+   * @returns {string} this.sourceSortBy - the default sortBy option
    * @memberof SourcesStore
    */
   getSourceSortBy() {
@@ -49,7 +48,7 @@ class SourcesStore extends EventEmitter {
   /**
    * @description Handles Sources actions
    * @returns {void}
-   * @param {function} action
+   * @param {function} action the dispatched action
    * @memberof SourcesStore
    */
   handleActions(action) {

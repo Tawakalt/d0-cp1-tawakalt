@@ -1,10 +1,10 @@
 import dispatcher from '../dispatchers/dispatcher';
 
 /**
- * @description sets url for Scraping
+ * @description dispatches url for Scraping to the store
  * @return {boolean} true
  * @export
- * @param {string} url url to be scraped from
+ * @param {string} url articles url to be scraped from
  */
 export function createUrl(url) {
   dispatcher.dispatch({

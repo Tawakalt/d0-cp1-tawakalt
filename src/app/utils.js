@@ -24,7 +24,7 @@ export default class Utils {
   /**
    * @description makes an API call to get articles
    * @static
-   * @returns {object} response
+   * @returns {object} response - response and error (if any)- response from the API call
    * @memberof Utils
    */
   static search() {
@@ -35,7 +35,7 @@ export default class Utils {
   /**
    * @description Makes an API call to get news sources
    * @static
-   * @returns {object} response
+   * @returns {object} response - response and error (if any)- response from the API call
    * @memberof Utils
    */
   static sources() {
@@ -46,7 +46,7 @@ export default class Utils {
   /**
    * @description Makes an API call to scrape url
    * @static
-   * @returns {object} response
+   * @returns {object} response and error (if any)- response from the API call
    * @memberof Utils
    */
   static scrape() {

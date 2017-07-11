@@ -17,7 +17,7 @@ export default class Navbar extends React.Component {
   /**
    * @description creates navbar
    * @method
-   * @returns {nav} nav
+   * @returns {nav} navbar
    * @memberof Navbar
    */
   render() {

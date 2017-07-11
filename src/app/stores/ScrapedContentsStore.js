@@ -17,9 +17,9 @@ class ScrapedContentsStore extends EventEmitter {
   }
 
   /**
-   * @description Reassigns this.articles to the response from NewsApi
+   * @description Reassigns this.content to the response from NewsApi
    * @returns {void}
-   * @param {string} content
+   * @param {string} content response from the API call
    * @memberof ScrapedContentsStore
    */
   createContent(content) {
@@ -29,7 +29,7 @@ class ScrapedContentsStore extends EventEmitter {
 
   /**
    * @description Returns value for articles
-   * @returns {string} this.articles
+   * @returns {string} this.content - response from the API call
    * @memberof ScrapedContentsStore
    */
   getContent() {
@@ -39,7 +39,7 @@ class ScrapedContentsStore extends EventEmitter {
   /**
    * @description Handles ScrapedContents actions
    * @returns {void}
-   * @param {function} action
+   * @param {function} action the dispatched action
    * @memberof ScrapedContentsStore
    */
   handleActions(action) {

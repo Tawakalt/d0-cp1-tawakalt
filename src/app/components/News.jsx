@@ -55,7 +55,7 @@ export default class News extends React.Component {
 
   /**
    * componentWillMount
-   * @description removes Listener from ScrapedContentsStore and ScrapeStore
+   * @description removes Listener from stores
    * @method
    * @memberof News
    * @returns {void}
@@ -68,7 +68,7 @@ export default class News extends React.Component {
 
   /**
    * createUrl
-   * @description fires off an action
+   * @description fires off an action to dispatch the selected news source and sortBy option to the store
    * @method
    * @memberof News
    * @returns {void}
@@ -101,7 +101,7 @@ export default class News extends React.Component {
 
   /**
    * search
-   * @description calls an external function and set state for news
+   * @description calls an external function that makes a search call to the API and dispatches the response to the store
    * @method
    * @memberof News
    * @returns {void}
@@ -121,7 +121,7 @@ export default class News extends React.Component {
 
   /**
    * sources
-   * @description calls an external function and set state for sources and sourceSortBy
+   * @description calls an external function that makes an API call and dispatches the response to the store
    * @method
    * @memberof News
    * @returns {void}
@@ -169,7 +169,7 @@ export default class News extends React.Component {
   /**
    * @description renders news articles
    * @method
-   * @returns {div} div
+   * @returns {div} news element
    * @memberof News
    */
   render() {   

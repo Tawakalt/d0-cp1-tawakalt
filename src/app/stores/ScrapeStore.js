@@ -19,7 +19,7 @@ class ScrapeStore extends EventEmitter {
   /**
    * @description Reassigns url to that of mercury
    * @returns {void}
-   * @param {string} url
+   * @param {string} url url of the article desired for scraping
    * @memberof ScrapeStore
    */
   scrapeUrl(url) {
@@ -29,7 +29,7 @@ class ScrapeStore extends EventEmitter {
 
   /**
    * @description Returns the url
-   * @returns {string} this.url
+   * @returns {string} this.url url to be used for the API call
    * @memberof ScrapeStore
    */
   getUrl() {
@@ -39,7 +39,7 @@ class ScrapeStore extends EventEmitter {
   /**
    * @description Handles Scrape actions
    * @returns {void}
-   * @param {function} action
+   * @param {function} action the dispatched action
    * @memberof ScrapeStore
    */
   handleActions(action) {

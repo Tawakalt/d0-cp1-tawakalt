@@ -1,10 +1,10 @@
 import dispatcher from '../dispatchers/dispatcher';
 
 /**
- * @description sets the sources gotten from NewsApi
+ * @description dispatches the sources gotten from NewsApi to the store
  * @return {boolean} true
  * @export
- * @param {object} sources response from NewsApi
+ * @param {object} sources news sources from NewsApi
  */
 export function setSources(sources) {
   dispatcher.dispatch({
