@@ -17,9 +17,9 @@ class AuthStore extends EventEmitter {
   }
 
   /**
-   * @description Reassigns auth to idToken
+   * @description Reassigns auth to user idToken
    * @returns {void}
-   * @param {string} idToken
+   * @param {string} idToken google user token
    * @memberof AuthStore
    */
   createAuth(idToken) {
@@ -29,7 +29,7 @@ class AuthStore extends EventEmitter {
 
   /**
    * @description Returns value for auth
-   * @returns {string} this.auth
+   * @returns {string} this.auth - google user token
    * @memberof AuthStore
    */
   getAuth() {
@@ -39,7 +39,7 @@ class AuthStore extends EventEmitter {
   /**
    * @description Handles Auth actions
    * @returns {void}
-   * @param {function} action
+   * @param {function} action the dispatched action
    * @memberof AuthStore
    */
   handleActions(action) {

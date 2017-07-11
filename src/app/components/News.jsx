@@ -7,8 +7,12 @@ import Navbar from './Navbar.jsx';
 import MapNews from './MapNews.jsx';
 import Utils from '../utils';
 import UrlStore from '../stores/UrlStore';
+import ArticlesStore from '../stores/ArticlesStore';
+import SourcesStore from '../stores/SourcesStore';
 import * as UrlActions from '../actions/UrlActions';
 import * as AuthActions from '../actions/AuthActions';
+import * as ArticlesActions from '../actions/ArticlesActions';
+import * as SourcesActions from '../actions/SourcesActions';
 
 /**
  * News Component
@@ -24,6 +28,9 @@ export default class News extends React.Component {
       sourceId:'abc-news-au',
     };
     this.getSort = this.getSort.bind(this);
+    this.updateArticles = this.updateArticles.bind(this);
+    this.updateSources = this.updateSources.bind(this);
+    this.search = this.search.bind(this);
   }
 
   /**
@@ -33,20 +40,35 @@ export default class News extends React.Component {
    * @memberof news
    * @returns {void}
    */
-  componentWillMount() {
+  componentDidMount() {
     UrlStore.on('change', () => {
       this.setState({
         content: '',
       });
       this.search();
     });
+    ArticlesStore.on('change', this.updateArticles);
+    SourcesStore.on('change', this.updateSources);
     this.sources();
     this.search();
   }
 
   /**
+   * componentWillMount
+   * @description removes Listener from stores
+   * @method
+   * @memberof News
+   * @returns {void}
+   */
+  componentWillUnmount() {
+    ArticlesStore.removeListener('change', this.updateArticles);
+    SourcesStore.removeListener('change', this.updateSources);
+    UrlStore.removeListener('change', this.search);
+  }
+
+  /**
    * createUrl
-   * @description fires off an action
+   * @description fires off an action to dispatch the selected news source and sortBy option to the store
    * @method
    * @memberof News
    * @returns {void}
@@ -79,7 +101,7 @@ export default class News extends React.Component {
 
   /**
    * search
-   * @description calls an external function and set state for news
+   * @description calls an external function that makes a search call to the API and dispatches the response to the store
    * @method
    * @memberof News
    * @returns {void}
@@ -87,9 +109,7 @@ export default class News extends React.Component {
   search() {
     Utils.search().then(response => {
       if (response.body){
-        this.setState({
-          news: response.body.articles,
-        });
+        ArticlesActions.setArticles(response.body.articles);
       }
       else{
         this.setState({
@@ -101,7 +121,7 @@ export default class News extends React.Component {
 
   /**
    * sources
-   * @description calls an external function and set state for sources and sourceSortBy
+   * @description calls an external function that makes an API call and dispatches the response to the store
    * @method
    * @memberof News
    * @returns {void}
@@ -109,10 +129,7 @@ export default class News extends React.Component {
   sources() {
     Utils.sources().then(response => {
       if(response.body){
-        this.setState({
-        sources: response.body.sources,
-        sourceSortBy: ['top'],
-      });
+        SourcesActions.setSources(response.body.sources);
     }
     else {
       this.setState({
@@ -123,18 +140,46 @@ export default class News extends React.Component {
   }
 
   /**
+   * updateArticles
+   * @description gets news articles from the store and sets a state for them
+   * @method
+   * @memberof News
+   * @returns {void}
+   */
+  updateArticles() {
+    this.setState({
+      articles: ArticlesStore.getArticles(),
+    });
+  }
+
+  /**
+   * updateSources
+   * @description gets news sources and sortby options from the store and sets states for them
+   * @method
+   * @memberof News
+   * @returns {void}
+   */
+  updateSources() {
+    this.setState({
+      sources: SourcesStore.getSources(),
+      sourceSortBy: SourcesStore.getSourceSortBy(),
+    });
+  }
+
+  /**
    * @description renders news articles
    * @method
-   * @returns {div} div
+   * @returns {div} news element
    * @memberof News
    */
-  render() {    
+  render() {   
       const sortByOptions = _.map(this.state.sourceSortBy, sortBy =>
        (
          <option key={sortBy} value={sortBy}>{sortBy}</option>
 
       ));
-      if (this.state.news){
+      
+      if (this.state.articles){
         return (
           <div>
             <Navbar />
@@ -175,7 +220,7 @@ export default class News extends React.Component {
                 <div className="col-md-3">
                 </div>
               </div>
-              <MapNews news={this.state.news} />
+              <MapNews />
             </div>
           </div>
         );
@@ -186,8 +231,6 @@ export default class News extends React.Component {
             <h1>{this.state.error}</h1>
           </div>
         );
-      }
-  
-    
+      } 
   }
 }

@@ -22,10 +22,10 @@ class UrlStore extends EventEmitter {
   }
 
   /**
-   * @description Reassigns url based on the selected source and sortBy option
+   * @description Reconstructs url based on the selected source and sortBy option
    * @returns {void}
-   * @param {string} source
-   * @param {string} sortBy
+   * @param {string} source the selected news source to make the API call
+   * @param {string} sortBy the selected sortBy option for the news source to make the API call
    * @memberof UrlStore
    */
   createUrl(source, sortBy) {
@@ -35,7 +35,7 @@ class UrlStore extends EventEmitter {
 
   /**
    * @description Returns the url
-   * @returns {string} this.url
+   * @returns {string} this.url - url needed to make the articles API call
    * @memberof UrlStore
    */
   getUrl() {
@@ -44,7 +44,7 @@ class UrlStore extends EventEmitter {
 
   /**
    * @description Returns the source url
-   * @returns {string} this.sourceUrl
+   * @returns {string} this.sourceUrl - url needed to make the source API call
    * @memberof UrlStore
    */
   getSourceUrl() {
@@ -54,7 +54,7 @@ class UrlStore extends EventEmitter {
   /**
    * @description Handles Url actions
    * @returns {void}
-   * @param {function} action
+   * @param {function} action the dispatched action
    * @memberof UrlStore
    */
   handleActions(action) {

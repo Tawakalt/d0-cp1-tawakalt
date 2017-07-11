@@ -1,10 +1,10 @@
 import dispatcher from '../dispatchers/dispatcher';
 
 /**
- * @description sets the user token
+ * @description dispatches the user token to the store
  * @return {boolean} true
  * @export
- * @param {string} idToken idToken from google
+ * @param {string} idToken idToken from google response
  */
 export function getAuth(idToken) {
   dispatcher.dispatch({

@@ -5,16 +5,19 @@ import Header from '../../src/app/components/Header.jsx';
 
 require ('../../browserMocks.js');
 
-describe('Header', () => {
+describe('Header Component', () => {
   const wrapper = mount(<Header />);
-  const spyWillUpdateState = sinon.spy(Header.prototype, 'updateState');
+  const componentWillMount = wrapper.instance().componentWillMount();
+  const componentWillUnmount = wrapper.instance().componentWillUnmount();
+  const updateState = wrapper.instance().updateState();
 
-  test('updateState should be called ', () => {
-    wrapper.instance().updateState();
-    expect(spyWillUpdateState.calledOnce).toBe(false);
-  });
+  describe('#updateState', () => {
+    test('should be called ', () => {
+      expect(updateState).toBe(undefined);
+    });
 
-  test('should have no state', () => {
-    expect(wrapper.state().auth).toEqual(undefined);
+    test('should have no initial value defined for this.state.auth', () => {
+      expect(wrapper.state().auth).toEqual(undefined);
+    });
   });
 });

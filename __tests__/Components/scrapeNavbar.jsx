@@ -3,7 +3,7 @@ import sinon from 'sinon';
 import { mount } from 'enzyme';
 import ScrapeNavbar from '../../src/app/components/ScrapeNavbar.jsx';
 
-describe('ScrapeNavbar', () => {
+describe('ScrapeNavbar Component', () => {
   const wrapper = mount(<ScrapeNavbar />);
 
   test('should have a button tag ', () => {

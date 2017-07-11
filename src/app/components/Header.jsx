@@ -45,7 +45,7 @@ export default class Header extends React.Component {
 
   /**
    * updateState
-   * @description sets the state for auth
+   * @description sets state for user token
    * @method
    * @memberof Header
    * @returns {void}
@@ -59,7 +59,7 @@ export default class Header extends React.Component {
   /**
    * @description declares the routes
    * @method
-   * @returns {div} div
+   * @returns {div} declared route elements
    * @memberof Header
    */
   render() {

@@ -19,11 +19,11 @@ export default class Login extends React.Component{
  
   /** 
    * responseGoogle
-   * @description saves id_token to local storage and fires off action to save id_token to store
+   * @description saves id_token to local storage and fires off action to dispatch the id_token to the store
    * @method
    * @memberof Login
    * @returns {void}
-   * @param {object} googleUser
+   * @param {object} googleUser the signed in google user
    */
   responseGoogle (googleUser) {
     localStorage.setItem("id_token", googleUser.getAuthResponse().id_token);
@@ -34,7 +34,7 @@ export default class Login extends React.Component{
   /**
    * @description renders SignIn text and button
    * @method
-   * @returns {div} div
+   * @returns {div} sign in text and button
    * @memberof Login
    */
   render () {
