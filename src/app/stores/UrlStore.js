@@ -15,8 +15,8 @@ class UrlStore extends EventEmitter {
    */
   constructor() {
     super();
-    this.source = 'abc-news-au';
-    this.sortBy = 'top';
+    this.source = localStorage.getItem('source');
+    this.sortBy = localStorage.getItem('sortBy');
     this.sourceUrl = `https://newsapi.org/v1/sources?apiKey=${NEWS_API_KEY}`;
     this.url = `https://newsapi.org/v1/articles?source=${this.source}&sortBy=${this.sortBy}&apiKey=${NEWS_API_KEY}`;
   }
