@@ -18,6 +18,8 @@ export default class Utils {
      */
   static logout() {
     localStorage.removeItem('id_token');
+    localStorage.removeItem('source');
+    localStorage.removeItem('sortBy');
     AuthActions.getAuth(null);
   }
 
