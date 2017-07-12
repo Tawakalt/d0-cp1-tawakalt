@@ -17,7 +17,7 @@ describe('Header Component', () => {
     });
 
     test('should have no initial value defined for this.state.auth', () => {
-      expect(wrapper.state().auth).toEqual(undefined);
+      expect(wrapper.state().auth).toEqual(null);
     });
   });
 });

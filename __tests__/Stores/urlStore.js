@@ -2,11 +2,13 @@ import UrlStore from '../../src/app/stores/UrlStore';
 import AppDispatcher from '../../src/app/dispatchers/dispatcher';
 
 const NEWS_API_KEY = process.env.NEWS_API_KEY;
+const source = localStorage.getItem('source');
+const sortBy = localStorage.getItem('sortBy');
 
 describe('UrlStore', () => {
   describe('#getUrl', () => {
     test('should exist and return the default url', () => {
-      expect(UrlStore.getUrl()).toEqual(`https://newsapi.org/v1/articles?source=abc-news-au&sortBy=top&apiKey=${NEWS_API_KEY}`);
+      expect(UrlStore.getUrl()).toEqual(`https://newsapi.org/v1/articles?source=${source}&sortBy=${sortBy}&apiKey=${NEWS_API_KEY}`);
     });
 
     test('should return a url based on the dispatched parameters', () => {
