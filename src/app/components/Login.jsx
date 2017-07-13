@@ -43,6 +43,7 @@ export default class Login extends React.Component{
   responseGoogle (googleUser) {
     localStorage.setItem("id_token", googleUser.getAuthResponse().id_token);
     const id_token = localStorage.getItem("id_token");
+    location.reload();
     AuthActions.getAuth(id_token);
     
   }
