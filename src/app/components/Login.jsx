@@ -1,6 +1,7 @@
 import React from 'react';
 import { GoogleLogin } from 'react-google-login-component';
 import * as AuthActions from '../actions/AuthActions';
+import Utils from '../utils';
 
 const CLIENT_ID = process.env.CLIENT_ID;
  
@@ -16,6 +17,20 @@ export default class Login extends React.Component{
   constructor (props, context) {
     super(props, context);
   }
+
+  /**
+   * componentDidMount
+   * @description Makes an API call to get news source and saves the default rendered news source and it's first sortBy option to the local storage
+   * @method
+   * @returns {void}
+   * @memberof Login
+   */
+  componentDidMount() {
+    Utils.sources().then(response => {
+        localStorage.setItem("source", response.body.sources[0].id);
+        localStorage.setItem("sortBy", response.body.sources[0].sortBysAvailable[0]);
+    });
+  }
  
   /** 
    * responseGoogle
@@ -29,6 +44,7 @@ export default class Login extends React.Component{
     localStorage.setItem("id_token", googleUser.getAuthResponse().id_token);
     const id_token = localStorage.getItem("id_token");
     AuthActions.getAuth(id_token);
+    
   }
  
   /**

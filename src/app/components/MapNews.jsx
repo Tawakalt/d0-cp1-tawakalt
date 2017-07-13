@@ -42,7 +42,7 @@ export default class MapNews extends React.Component {
   }
 
   /**
-   * componentWillMount
+   * componentWillUnmount
    * @description removes Listener from ScrapedContentsStore and ScrapeStore
    * @method
    * @memberof MapNews
