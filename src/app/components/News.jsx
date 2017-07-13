@@ -34,7 +34,7 @@ export default class News extends React.Component {
   }
 
   /**
-   * componentWillMount
+   * componentDidMount
    * @description Listens to an onchange event from stores
    * @method
    * @memberof news
@@ -54,7 +54,7 @@ export default class News extends React.Component {
   }
 
   /**
-   * componentWillMount
+   * componentWillUnmount
    * @description removes Listener from stores
    * @method
    * @memberof News
@@ -130,8 +130,6 @@ export default class News extends React.Component {
     Utils.sources().then(response => {
       if(response.body){
         SourcesActions.setSources(response.body.sources);
-        localStorage.setItem("source", response.body.sources[0].id);
-        localStorage.setItem("sortBy", response.body.sources[0].sortBysAvailable[0]);
     }
     else {
       this.setState({
